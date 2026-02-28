@@ -33,7 +33,7 @@
 ```
 react_learn/
 ├── README.md              ← 项目介绍（本文件）
-├── CURRICULUM.md          ← 课程大纲 + 全部课时索引
+├── .vitepress/            ← VitePress 配置
 └── docs/
     ├── Lesson_01.md       ← Phase 1：Todo App（6 课）
     ├── ...
@@ -47,7 +47,7 @@ react_learn/
 
 ## 🏁 开始学习
 
-👉 查看 [**课程大纲**](./CURRICULUM.md) 了解完整路线图，然后从 [Lesson 01](./docs/Lesson_01.md) 开始。
+👉 查看 [**课程大纲**](./docs/CURRICULUM.md) 了解完整路线图，然后从 [Lesson 01](./docs/Lesson_01.md) 开始。
 
 ## ⚙️ 环境要求
 
