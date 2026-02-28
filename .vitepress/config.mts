@@ -16,17 +16,7 @@ export default withMermaid(
       logo: '/logo.svg',
       siteTitle: 'React 19 学习体系',
 
-      nav: [
-        {
-          text: '阶段',
-          items: [
-            { text: 'Phase 1: Todo App', link: '/docs/Lesson_01' },
-            { text: 'Phase 2: 任务管理', link: '/docs/Lesson_07' },
-            { text: 'Phase 3: 全栈电商', link: '/docs/Lesson_17' },
-            { text: 'Phase 4: 专精进阶', link: '/docs/Lesson_29' },
-          ]
-        },
-      ],
+      nav: [],
 
       sidebar: {
         '/docs/': [
