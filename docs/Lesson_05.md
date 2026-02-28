@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：刷新页面数据不丢失，可以双击编辑任务文字。
 
----
 
 ## 一、什么是副作用（Side Effect）？
 
@@ -58,9 +57,9 @@ useEffect(() => {
 flowchart TB
     A["useEffect(fn, ???)"]
     
-    A -->|"无依赖数组\nuseEffect(fn)"| B["每次渲染后都执行\n⚠️ 通常不是你想要的"]
-    A -->|"空数组\nuseEffect(fn, [])"| C["只在挂载时执行 1 次\n类似 componentDidMount"]
-    A -->|"有依赖\nuseEffect(fn, [a, b])"| D["挂载时执行\na 或 b 变化时执行"]
+    A -->|"无依赖数组\nuseEffect(fn)"| B["每次渲染后都执行<br/>⚠️ 通常不是你想要的"]
+    A -->|"空数组\nuseEffect(fn, [])"| C["只在挂载时执行 1 次<br/>类似 componentDidMount"]
+    A -->|"有依赖\nuseEffect(fn, [a, b])"| D["挂载时执行<br/>a 或 b 变化时执行"]
     
     style B fill:#ef4444,color:#fff
     style C fill:#10b981,color:#fff
@@ -137,7 +136,7 @@ flowchart LR
     subgraph "每次 todos 变化"
         D["setTodos(...)"] --> E["组件重新渲染"]
         E --> F["useEffect 触发"]
-        F --> G["localStorage.setItem\nJSON.stringify"]
+        F --> G["localStorage.setItem<br/>JSON.stringify"]
     end
 ```
 
@@ -370,11 +369,11 @@ inputRef.current?.select()
 ```mermaid
 flowchart LR
     subgraph "useState"
-        S["值变化 → 触发重渲染\n适合：UI 需要反映的数据"]
+        S["值变化 → 触发重渲染<br/>适合：UI 需要反映的数据"]
     end
     
     subgraph "useRef"
-        R["值变化 → 不触发渲染\n.current 可随时读写\n适合：和 UI 无关的内部值"]
+        R["值变化 → 不触发渲染<br/>.current 可随时读写<br/>适合：和 UI 无关的内部值"]
     end
 ```
 
@@ -558,7 +557,7 @@ flowchart TB
     A["渲染组件"]
     A --> B{"use(promise)\npromise 完成了？"}
     B -->|"是"| C["正常渲染组件 ✅"]
-    B -->|"否"| D["抛出 Promise\n（throw promise）"]
+    B -->|"否"| D["抛出 Promise<br/>（throw promise）"]
     D --> E["Suspense 捕获"]
     E --> F["显示 fallback"]
     F --> G["Promise 完成"]
@@ -595,9 +594,3 @@ flowchart TB
 | 编辑状态的本地 state 管理 | 组件内部 state vs 提升的 state |
 | — | 清理函数和 StrictMode 行为 |
 | — | React 19 `use()` + Suspense 概念 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 06：useReducer 重构 + 性能优化**](./Lesson_06.md)

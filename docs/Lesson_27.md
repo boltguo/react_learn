@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：一个 Lighthouse 评分显著提升的电商应用，建立性能预算意识。
 
----
 
 ## 一、Core Web Vitals — Google 的衡量标准
 
@@ -13,14 +12,14 @@ Google 使用三个核心指标来衡量网页的用户体验，并将其作为�
 ```mermaid
 flowchart LR
     subgraph "Core Web Vitals"
-        LCP["LCP\nLargest Contentful Paint\n最大内容绘制\n目标 < 2.5s"]
-        INP["INP\nInteraction to Next Paint\n交互到下次绘制\n目标 < 200ms"]
-        CLS["CLS\nCumulative Layout Shift\n累计布局偏移\n目标 < 0.1"]
+        LCP["LCP<br/>Largest Contentful Paint<br/>最大内容绘制<br/>目标 < 2.5s"]
+        INP["INP<br/>Interaction to Next Paint<br/>交互到下次绘制<br/>目标 < 200ms"]
+        CLS["CLS<br/>Cumulative Layout Shift<br/>累计布局偏移<br/>目标 < 0.1"]
     end
     
-    LCP --> L1["页面主要内容\n多久能看到？"]
-    INP --> I1["点击按钮后\n多久有反馈？"]
-    CLS --> C1["页面元素\n会不会乱跳？"]
+    LCP --> L1["页面主要内容<br/>多久能看到？"]
+    INP --> I1["点击按钮后<br/>多久有反馈？"]
+    CLS --> C1["页面元素<br/>会不会乱跳？"]
     
     style LCP fill:#10b981,color:#fff
     style INP fill:#818cf8,color:#fff
@@ -139,10 +138,10 @@ export default function ProductsLoading() {
 
 ```mermaid
 flowchart LR
-    Nav["用户点击\n商品链接"] 
-    --> Loading["立即显示\nloading.tsx\n骨架屏"]
-    --> Data["服务端查询\n数据库"]
-    --> Page["替换为\npage.tsx\n真实内容"]
+    Nav["用户点击<br/>商品链接"] 
+    --> Loading["立即显示<br/>loading.tsx<br/>骨架屏"]
+    --> Data["服务端查询<br/>数据库"]
+    --> Page["替换为<br/>page.tsx<br/>真实内容"]
     
     style Loading fill:#f59e0b,color:#fff
     style Page fill:#10b981,color:#fff
@@ -234,10 +233,10 @@ Next.js 有一套复杂但强大的缓存机制：
 ```mermaid
 flowchart TB
     subgraph "缓存层级"
-        RC["Request Memoization\n同一次请求中\n重复 fetch 自动去重"]
-        DC["Data Cache\n跨请求的数据缓存\n(fetch 默认缓存)"]
-        FC["Full Route Cache\n整个页面的 HTML 缓存\n(静态页面)"]
-        RouterC["Router Cache\n客户端的路由缓存\n(导航时使用)"]
+        RC["Request Memoization<br/>同一次请求中<br/>重复 fetch 自动去重"]
+        DC["Data Cache<br/>跨请求的数据缓存<br/>(fetch 默认缓存)"]
+        FC["Full Route Cache<br/>整个页面的 HTML 缓存<br/>(静态页面)"]
+        RouterC["Router Cache<br/>客户端的路由缓存<br/>(导航时使用)"]
     end
     
     RC --> DC --> FC --> RouterC
@@ -382,9 +381,3 @@ function CategoryFilter({ categories }: { categories: string[] }) {
 | 用 Suspense 实现了流式渲染 | 边渲染边发送 |
 | 了解了 Next.js 缓存体系 | fetch cache / `unstable_cache` / revalidate |
 | 用 Bundle Analyzer 做了体积分析 | 性能预算概念 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 28：部署上线 — 让世界看到你的作品**](./Lesson_28.md)

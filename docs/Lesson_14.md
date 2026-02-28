@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：通过组合 React Hook Form 和 Zod，创建“新建项目”和“新建任务”两个高复杂度、带严格校验规则且带有丝滑交互报错提示的弹窗表单。
 
----
 
 ## 一、原生 React 表单的痛点
 
@@ -318,7 +317,7 @@ flowchart LR
     end
     
     subgraph "React 19"
-        C["function Component({ ref })"] --> D["ref 就在 props 里"]
+        C["function Component(﹛ ref ﹜)"] --> D["ref 就在 props 里"]
     end
     
     style A fill:#ef4444,color:#fff
@@ -345,9 +344,3 @@ flowchart LR
 | 安装使用了一套 Zod Schema | 彻底利用 TypeScript 及利用它的 `inference` 反推导类型能力 |
 | 绑定了 Shadcn Form 组合套件 | 利用 Hook Resovlers 强行将验证绑定到事件生命周期中 |
 | 了解到解构式双向接管法 | Controller `Render Props` 设计模式 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 15：重构业务逻辑 — 自定义 Hooks 与关注点分离**](./Lesson_15.md)

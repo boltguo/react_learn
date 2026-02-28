@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：商品管理后台（增/删/改），带有表单验证、错误提示和乐观更新。
 
----
 
 ## 一、什么是 Server Actions？
 
@@ -13,7 +12,7 @@
 ```mermaid
 flowchart LR
     Form["表单提交"] --> API["fetch('/api/products', method: POST)"]
-    API --> Route["API Route Handler\n(src/app/api/products/route.ts)"]
+    API --> Route["API Route Handler<br/>(src/app/api/products/route.ts)"]
     Route --> DB["Prisma → 数据库"]
 ```
 
@@ -21,7 +20,7 @@ Server Actions 把这条链路**压缩成一步**：
 
 ```mermaid
 flowchart LR
-    Form["<form action={serverAction}>"] --> DB["直接执行服务端代码\n→ Prisma → 数据库"]
+    Form["<form action=﹛serverAction﹜>"] --> DB["直接执行服务端代码<br/>→ Prisma → 数据库"]
 ```
 
 ---
@@ -319,11 +318,11 @@ Server Actions 的一大优势是你可以共享类型。从 Prisma Schema → Z
 
 ```mermaid
 flowchart LR
-    Prisma["Prisma Schema\n(数据库结构)"]
-    Prisma -->|"npx prisma generate"| Types["Prisma 生成的类型\n(Product, User...)"]
-    Types --> Zod["Zod Schema\n(运行时验证)"]
-    Zod --> Action["Server Action\n(类型安全的数据处理)"]
-    Action --> UI["React UI\n(TypeScript 编译期类型检查)"]
+    Prisma["Prisma Schema<br/>(数据库结构)"]
+    Prisma -->|"npx prisma generate"| Types["Prisma 生成的类型<br/>(Product, User...)"]
+    Types --> Zod["Zod Schema<br/>(运行时验证)"]
+    Zod --> Action["Server Action<br/>(类型安全的数据处理)"]
+    Action --> UI["React UI<br/>(TypeScript 编译期类型检查)"]
     
     style Prisma fill:#10b981,color:#fff
     style Types fill:#818cf8,color:#fff
@@ -377,9 +376,3 @@ revalidateTag('products')  // 只刷新打了 'products' 标签的缓存
 | 构建了商品管理后台列表 | Server Component 直接查 DB + 行内 Action |
 | — | `revalidatePath` vs `revalidateTag` 缓存刷新 |
 | — | 全栈类型安全链路：Prisma → Zod → Action → UI |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 21：用户认证 — NextAuth.js v5 登录体系**](./Lesson_21.md)

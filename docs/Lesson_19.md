@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：完整的数据库 Schema（用户、商品、订单），并在商品列表页从数据库读取真实数据。
 
----
 
 ## 一、Prisma 是什么？
 
@@ -20,9 +19,9 @@
 
 ```mermaid
 flowchart LR
-    Schema["prisma/schema.prisma\n声明式模型定义"] 
-    -->|"npx prisma migrate"| DB["数据库\n(PostgreSQL / SQLite)"]
-    Schema -->|"npx prisma generate"| Client["@prisma/client\n类型安全的查询 API"]
+    Schema["prisma/schema.prisma<br/>声明式模型定义"] 
+    -->|"npx prisma migrate"| DB["数据库<br/>(PostgreSQL / SQLite)"]
+    Schema -->|"npx prisma generate"| Client["@prisma/client<br/>类型安全的查询 API"]
     Client -->|"prisma.product.findMany()"| DB
     
     style Schema fill:#f59e0b,color:#fff
@@ -302,8 +301,8 @@ export default async function ProductsPage() {
 
 ```mermaid
 flowchart LR
-    A["❌ 反范式设计\nOrderItem: { productName, productPrice, ... }"]
-    B["✅ 3NF 设计\nOrderItem: { productId, quantity, price }"]
+    A["❌ 反范式设计<br/>OrderItem: ﹛ productName, productPrice, ... ﹜"]
+    B["✅ 3NF 设计<br/>OrderItem: ﹛ productId, quantity, price ﹜"]
     
     A -->|"商品改名了？\n所有历史订单都要改！"| Problem["更新异常 💥"]
     B -->|"商品改名？\n只改 Product 表\n历史订单不受影响"| OK["数据一致 ✅"]
@@ -364,9 +363,3 @@ model Order {
 | 执行了数据库迁移和数据填充 | `prisma migrate` + `prisma db seed` |
 | 在 Server Component 里直接查询了数据库 | 无需 API 层、无需 useEffect！ |
 | — | 数据库设计中的价格快照和索引知识 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 20：Server Actions — 全栈表单与数据变更**](./Lesson_20.md)

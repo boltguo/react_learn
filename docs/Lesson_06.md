@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：Phase 1 Todo App 完成版——逻辑清晰、性能优化、代码规范。
 
----
 
 ## 一、为什么需要 useReducer？
 
@@ -14,20 +13,20 @@ App.tsx 中的状态逻辑越来越分散：`addTodo`、`toggleTodo`、`deleteTo
 flowchart LR
     subgraph "useState 方式"
         S["todos state"]
-        S --- A1["addTodo\nsetTodos(prev => [...])"]
-        S --- A2["toggleTodo\nsetTodos(prev => prev.map(...))"]
-        S --- A3["deleteTodo\nsetTodos(prev => prev.filter(...))"]
-        S --- A4["editTodo\nsetTodos(prev => prev.map(...))"]
-        S --- A5["clearCompleted\nsetTodos(prev => prev.filter(...))"]
+        S --- A1["addTodo<br/>setTodos(prev => [...])"]
+        S --- A2["toggleTodo<br/>setTodos(prev => prev.map(...))"]
+        S --- A3["deleteTodo<br/>setTodos(prev => prev.filter(...))"]
+        S --- A4["editTodo<br/>setTodos(prev => prev.map(...))"]
+        S --- A5["clearCompleted<br/>setTodos(prev => prev.filter(...))"]
     end
 
     subgraph "useReducer 方式"
-        R["reducer 函数\n集中处理所有操作"]
-        R --- D["dispatch({ type: 'ADD' })"]
-        R --- E["dispatch({ type: 'TOGGLE' })"]
-        R --- F["dispatch({ type: 'DELETE' })"]
-        R --- G["dispatch({ type: 'EDIT' })"]
-        R --- H["dispatch({ type: 'CLEAR' })"]
+        R["reducer 函数<br/>集中处理所有操作"]
+        R --- D["dispatch(﹛ type: 'ADD' ﹜)"]
+        R --- E["dispatch(﹛ type: 'TOGGLE' ﹜)"]
+        R --- F["dispatch(﹛ type: 'DELETE' ﹜)"]
+        R --- G["dispatch(﹛ type: 'EDIT' ﹜)"]
+        R --- H["dispatch(﹛ type: 'CLEAR' ﹜)"]
     end
     
     style R fill:#818cf8,color:#fff
@@ -202,11 +201,11 @@ export default App
 ```mermaid
 flowchart TB
     A["感觉到卡顿了吗？"]
-    A -->|"没有"| B["不需要优化 ✅\nPremature optimization\nis the root of all evil"]
-    A -->|"有"| C["用 React DevTools\nProfiler 定位瓶颈"]
+    A -->|"没有"| B["不需要优化 ✅<br/>Premature optimization<br/>is the root of all evil"]
+    A -->|"有"| C["用 React DevTools<br/>Profiler 定位瓶颈"]
     C --> D["找到不必要的重渲染？"]
     D -->|"是"| E["使用 memo / useMemo / useCallback"]
-    D -->|"不是"| F["可能是其他原因\n虚拟列表 / 防抖 / Web Worker"]
+    D -->|"不是"| F["可能是其他原因<br/>虚拟列表 / 防抖 / Web Worker"]
     
     style B fill:#10b981,color:#fff
 ```
@@ -293,9 +292,9 @@ const filteredTodos = useMemo(() => {
 flowchart TB
     A["性能优化三剑客"]
     
-    A --> B["React.memo\n包裹组件\nprops 不变 → 跳过渲染"]
-    A --> C["useCallback\n缓存函数\n避免 memo 因函数引用变化而失效"]
-    A --> D["useMemo\n缓存计算结果\n避免每次渲染都重复昂贵计算"]
+    A --> B["React.memo<br/>包裹组件<br/>props 不变 → 跳过渲染"]
+    A --> C["useCallback<br/>缓存函数<br/>避免 memo 因函数引用变化而失效"]
+    A --> D["useMemo<br/>缓存计算结果<br/>避免每次渲染都重复昂贵计算"]
     
     B -.->|"需要配合"| C
     
@@ -393,11 +392,11 @@ React 团队正在开发的 **编译器**，目标是 **自动完成 memo / useC
 
 ```mermaid
 flowchart LR
-    A["你写的代码\n（无需手动优化）"]
+    A["你写的代码<br/>（无需手动优化）"]
     -->|"React Compiler\n编译时自动分析"| 
-    B["优化后的代码\n（自动 memo/useCallback）"]
+    B["优化后的代码<br/>（自动 memo/useCallback）"]
     -->
-    C["运行时\n性能最优 ✅"]
+    C["运行时<br/>性能最优 ✅"]
     
     style B fill:#818cf8,color:#fff
 ```
@@ -452,16 +451,16 @@ function TodoForm() {
 ```mermaid
 flowchart TB
     subgraph "Phase 1 Todo App ✅"
-        L1["Lesson 01\n项目搭建 + JSX"]
-        L2["Lesson 02\n组件 + Props"]
-        L3["Lesson 03\nuseState"]
-        L4["Lesson 04\nCRUD + 筛选"]
-        L5["Lesson 05\nuseEffect + 编辑"]
-        L6["Lesson 06\nuseReducer + 优化"]
+        L1["Lesson 01<br/>项目搭建 + JSX"]
+        L2["Lesson 02<br/>组件 + Props"]
+        L3["Lesson 03<br/>useState"]
+        L4["Lesson 04<br/>CRUD + 筛选"]
+        L5["Lesson 05<br/>useEffect + 编辑"]
+        L6["Lesson 06<br/>useReducer + 优化"]
         L1 --> L2 --> L3 --> L4 --> L5 --> L6
     end
     
-    L6 -->|"Phase 2"| P2["📋 任务管理系统\nRouter · Zustand\nTanStack Query · shadcn/ui"]
+    L6 -->|"Phase 2"| P2["📋 任务管理系统<br/>Router · Zustand<br/>TanStack Query · shadcn/ui"]
     
     style L6 fill:#10b981,color:#fff
     style P2 fill:#818cf8,color:#fff
@@ -487,9 +486,3 @@ flowchart TB
 1. **测试 reducer**：单独测试 `todoReducer`，验证每个 action 的行为
 2. **添加 undo**：保存操作历史，实现撤销功能（提示：用 state 记录之前的 todos 快照）
 3. **DevTools Profiler**：安装 React DevTools，用 Profiler 观察 memo 前后的渲染差异
-
----
-
-## ➡️ 下一阶段
-
-[**回到课程大纲**](../CURRICULUM.md) → Phase 2：📋 任务管理系统

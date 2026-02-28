@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：通过乐观更新实现任务状态瞬间切换，带防抖功能的搜索栏，以及滑动加载的无限列表。
 
----
 
 ## 一、网络延迟带来的糟糕 UX
 
@@ -480,15 +479,15 @@ flowchart TB
         V1["Task 8"]
         V2["Task 9"]
         V3["Task 10"]
-        Sentinel["🎯 底部哨兵 div\n(ref={bottomRef})"]
+        Sentinel["🎯 底部哨兵 div<br/>(ref=﹛bottomRef﹜)"]
     end
     
     subgraph "IntersectionObserver"
-        IO["观察者\nobserver.observe(el)"]
+        IO["观察者<br/>observer.observe(el)"]
     end
     
-    IO -->|"哨兵进入视口"| Callback["回调触发\nfetchNextPage()"]
-    Callback --> NewData["加载 Task 11~15\n哨兵被推到更下面"]
+    IO -->|"哨兵进入视口"| Callback["回调触发<br/>fetchNextPage()"]
+    Callback --> NewData["加载 Task 11~15<br/>哨兵被推到更下面"]
     
     style Sentinel fill:#f59e0b,color:#fff
     style Callback fill:#10b981,color:#fff
@@ -516,9 +515,3 @@ flowchart TB
 | 了解了快速切换导致的请求竞态 | TanStack Query 自动竞态保护 + `AbortController` |
 | 用 `placeholderData` 改善换页体验 | 防止重新进入 Loading 态 |
 | 引入 `useInfiniteQuery` 接管分页追加逻辑 | 多维数组结构展平 + `IntersectionObserver` 自动触底 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 13：专业级 UI 集成 — shadcn/ui 组件库基础**](./Lesson_13.md)

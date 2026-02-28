@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：一个带有错误兜底、优雅 Loading 态、并发更新的健壮应用。
 
----
 
 ## 一、ErrorBoundary — 组件级异常防护墙
 
@@ -26,7 +25,7 @@ flowchart TB
         Layout2 --> Sidebar2["Sidebar ✅ 正常"]
         Layout2 --> EB["ErrorBoundary 🛡️"]
         EB --> Board2["Board 💥 报错"]
-        EB -->|"捕获错误"| Fallback["显示友好提示 UI\n而不是白屏"]
+        EB -->|"捕获错误"| Fallback["显示友好提示 UI<br/>而不是白屏"]
     end
     
     style White fill:#ef4444,color:#fff
@@ -231,7 +230,7 @@ export function TaskListSkeleton() {
 flowchart TB
     subgraph "同步渲染 (React 17)"
         S1["开始渲染 1000 个列表项"] 
-        --> S2["⏳ 用户点击按钮\n(被阻塞！)"]
+        --> S2["⏳ 用户点击按钮<br/>(被阻塞！)"]
         --> S3["渲染完成"]
         --> S4["终于响应按钮点击"]
     end
@@ -239,7 +238,7 @@ flowchart TB
     subgraph "并发渲染 (React 18+)"
         C1["开始渲染 1000 个列表项"]
         --> C2["⚡ 用户点击按钮"]
-        --> C3["暂停列表渲染！\n先处理按钮点击"]
+        --> C3["暂停列表渲染！<br/>先处理按钮点击"]
         --> C4["按钮立即响应 ✅"]
         --> C5["恢复列表渲染"]
     end
@@ -446,18 +445,18 @@ flowchart TB
     User["🙍‍♂️ 用户"]
     
     subgraph "UI 组件层"
-        Pages["页面组件\n(Home, Board, Projects)"]
-        Shadcn["shadcn/ui\n(Buttons, Dialogs, Inputs)"]
-        Forms["表单流\n(RHF + Zod)"]
+        Pages["页面组件<br/>(Home, Board, Projects)"]
+        Shadcn["shadcn/ui<br/>(Buttons, Dialogs, Inputs)"]
+        Forms["表单流<br/>(RHF + Zod)"]
     end
     
     subgraph "健壮性保障"
-        EB["ErrorBoundary 🛡️\n(组件错误兜底)"]
-        Susp["Suspense ⏳\n(优雅 Loading)"]
+        EB["ErrorBoundary 🛡️<br/>(组件错误兜底)"]
+        Susp["Suspense ⏳<br/>(优雅 Loading)"]
     end
     
     subgraph "逻辑层"
-        Hooks["自定义 Hooks\n(useTaskMutations\nuseDebounce)"]
+        Hooks["自定义 Hooks<br/>(useTaskMutations<br/>useDebounce)"]
     end
     
     subgraph "路由层"
@@ -465,8 +464,8 @@ flowchart TB
     end
     
     subgraph "状态层"
-        Zustand["Zustand\n(客户端状态)"]
-        TanStack["TanStack Query\n(服务端状态)"]
+        Zustand["Zustand<br/>(客户端状态)"]
+        TanStack["TanStack Query<br/>(服务端状态)"]
     end
     
     subgraph "服务端"
@@ -508,16 +507,3 @@ npm run preview    # 本地预览打包结果
 **SPA 路由 404 修复**（参见之前的部署课程）：
 - Vercel/Netlify：自动支持
 - Nginx：`try_files $uri $uri/ /index.html;`
-
----
-
-## ➡️ 通向架构巅峰的进阶
-
-我们将进入 **Phase 3 全栈独立开发者体系构建**！
-- **Next.js 15 (App Router)** — React 的最强服务端渲染元框架
-- **React Server Components** — 2024年最重大的 React 底层革命
-- **Prisma + PostgreSQL** — 直接在 React 组件里安全地写 SQL！
-- **NextAuth** — 一键登录体系
-- **Stripe** — 真实可玩的支付逻辑
-
-准备好了吗？ [**点击进入 Phase 3：全栈与服务端开发**](./Lesson_17.md) 🚀

@@ -1,0 +1,31 @@
+{
+  "name": "react_learn",
+  "version": "1.0.0",
+  "description": "> 以真实项目为主线，边写边学，深入掌握 React 19 及现代前端全栈生态。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boltguo/react_learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/boltguo/react_learn/issues"
+  },
+  "homepage": "https://github.com/boltguo/react_learn#readme",
+  "devDependencies": {
+    "mermaid": "^11.12.3",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  }
+}

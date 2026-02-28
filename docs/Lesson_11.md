@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：将项目列表数据从本地 Zustand 迁移到远端 Mock API，并实现带 loading 的优雅请求。
 
----
 
 ## 一、重新思考：客户端状态 vs 服务端状态
 
@@ -126,8 +125,8 @@ export const fetchProjects = async () => {
 flowchart TB
     A["useQuery"] --> B{ "有缓存吗？" }
     B -->|"有，且很新鲜 (staleTime 没过)"| C["马上返回缓存"]
-    B -->|"有，但过期了 (staleTime 已过)"| D["马上返回缓存 (不让用户看白屏)\n👉 同时后台静默发请求更新"]
-    B -->|"没缓存 (首次加载)"| E["isPending: true\n显示 Loading，并去发请求"]
+    B -->|"有，但过期了 (staleTime 已过)"| D["马上返回缓存 (不让用户看白屏)<br/>👉 同时后台静默发请求更新"]
+    B -->|"没缓存 (首次加载)"| E["isPending: true<br/>显示 Loading，并去发请求"]
     
     style C fill:#10b981,color:#fff
 ```
@@ -276,9 +275,3 @@ function AddProjectButton() {
 | 用 `useQuery` 抓取数据并展示加载条 | 缓存隔离 (`queryKey`) 与重试机制 |
 | 用 `useMutation` 写入数据 | 控制状态过期 (`invalidateQueries`) 倒逼前端同步 |
 | — | 理解由于组件挂载时机引起的嵌套瀑布流请求 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 12：高级数据交互 — 无限滚动与乐观更新**](./Lesson_12.md)

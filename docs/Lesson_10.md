@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：带有本地化存储功能（刷新不丢数据）的项目看板，以及一个全局的主题切换开关。
 
----
 
 ## 一、什么是 Zustand 中间件 (Middleware)？
 
@@ -192,13 +191,13 @@ export default function RootLayout() {
 ```mermaid
 flowchart TB
     subgraph "方式A: Redux 风格 (单一巨型 Store)"
-        StoreA["useAppStore\n{ \ntheme: '...',\nuser: {...},\nprojects: [...]\n}"]
+        StoreA["useAppStore<br/>﹛ <br/>theme: '...',<br/>user: ﹛...﹜,<br/>projects: [...]<br/>﹜"]
     end
     
     subgraph "方式B: Zustand/Jotai 风格 (按领域拆分)"
-        StoreB1["useThemeStore\n{ theme }"]
-        StoreB2["useUserStore\n{ user }"]
-        StoreB3["useProjectStore\n{ projects }"]
+        StoreB1["useThemeStore<br/>﹛ theme ﹜"]
+        StoreB2["useUserStore<br/>﹛ user ﹜"]
+        StoreB3["useProjectStore<br/>﹛ projects ﹜"]
     end
 ```
 
@@ -280,9 +279,3 @@ const useProjectStore = create<ProjectState>()(
 | 建立了全局 `useThemeStore` | 按业务领域拆解 Store 的架构理念 |
 | 将副作用和 HTML Class 进行绑定 | 针对全站的 Tailwind Dark Mode 应用方式 |
 | — | 极为强大的、拯救复杂深层对象嵌套的 `Immer` 库 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 11：对接 Mock API — 服务端状态初探与 TanStack Query**](./Lesson_11.md)

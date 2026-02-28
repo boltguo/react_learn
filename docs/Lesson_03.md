@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：Todo App 可以动态添加新任务了！
 
----
 
 ## 一、为什么需要 State？
 
@@ -14,12 +13,12 @@ Lesson 02 的数据是硬编码的常量，UI 无法响应用户操作。**State
 flowchart LR
     subgraph "❌ 普通变量"
         A1["let count = 0"] --> A2["count++"]
-        A2 --> A3["值变了\n但 React 不知道\nUI 不更新 😢"]
+        A2 --> A3["值变了<br/>但 React 不知道<br/>UI 不更新 😢"]
     end
     
     subgraph "✅ useState"
-        B1["const [count, setCount]\n= useState(0)"] --> B2["setCount(1)"]
-        B2 --> B3["React 知道了！\n重新渲染组件\nUI 更新 🎉"]
+        B1["const [count, setCount]<br/>= useState(0)"] --> B2["setCount(1)"]
+        B2 --> B3["React 知道了！<br/>重新渲染组件<br/>UI 更新 🎉"]
     end
 ```
 
@@ -151,7 +150,7 @@ flowchart TB
         M1["const arr = [1, 2, 3]"]
         M2["arr.push(4)"]
         M3["setArr(arr)"]
-        M4["arr === arr → true\nReact 认为没变化\n不更新 UI ❌"]
+        M4["arr === arr → true<br/>React 认为没变化<br/>不更新 UI ❌"]
         M1 --> M2 --> M3 --> M4
     end
     
@@ -159,7 +158,7 @@ flowchart TB
         I1["const arr = [1, 2, 3]"]
         I2["const newArr = [...arr, 4]"]
         I3["setArr(newArr)"]
-        I4["newArr !== arr → true\nReact 知道有变化\n更新 UI ✅"]
+        I4["newArr !== arr → true<br/>React 知道有变化<br/>更新 UI ✅"]
         I1 --> I2 --> I3 --> I4
     end
     
@@ -382,9 +381,3 @@ useEffect(() => {
 | — | 函数式更新 `setState(prev => ...)` |
 | — | 延迟初始化 `useState(() => ...)` |
 | — | Hooks 闭包陷阱原理与解决方案 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 04：完成 / 删除 / 筛选 — 完善 Todo 交互**](./Lesson_04.md)

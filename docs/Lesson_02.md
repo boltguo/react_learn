@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：同样的 Todo 页面，从 1 个大组件变成 5 个职责清晰的小组件。
 
----
 
 ## 一、为什么要拆组件？
 
@@ -15,11 +14,11 @@ Lesson 01 所有代码挤在一个 `App.tsx`，真实项目中会很痛苦。组
 ```mermaid
 flowchart LR
     subgraph "Lesson 01：单文件"
-        A["App.tsx\n100+ 行\n所有逻辑混在一起"]
+        A["App.tsx<br/>100+ 行<br/>所有逻辑混在一起"]
     end
     
     subgraph "Lesson 02：组件化"
-        B["App.tsx\n（组装者）"]
+        B["App.tsx<br/>（组装者）"]
         B --> C["Header"]
         B --> D["TodoInput"]
         B --> E["TodoFilter"]
@@ -47,11 +46,11 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A["Props（输入）\nname='Alice'"]
+    A["Props（输入）<br/>name='Alice'"]
     -->
-    B["组件函数\nGreeting"]
+    B["组件函数<br/>Greeting"]
     -->
-    C["JSX（输出）\n&lt;h1&gt;Hello, Alice!&lt;/h1&gt;"]
+    C["JSX（输出）<br/>&lt;h1&gt;Hello, Alice!&lt;/h1&gt;"]
 ```
 
 ```tsx
@@ -429,7 +428,7 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    App["App\n（数据源 · 唯一真相）"]
+    App["App<br/>（数据源 · 唯一真相）"]
     
     App -->|"total, completed"| Header
     App -->|"onAdd"| TodoInput
@@ -510,9 +509,3 @@ flowchart LR
 | 用回调实现事件传递 | `onXxx` 回调命名约定 |
 | 创建了 types.ts 共享类型 | interface vs type 选择 |
 | — | 单向数据流：数据向下，事件向上 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 03：实现添加任务 — useState 让数据活起来**](./Lesson_03.md)

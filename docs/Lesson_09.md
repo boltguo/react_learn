@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：将散落在各个组件的 Sidebar 菜单数据和项目统计数据抽取为全局 store，并实现双向同步。
 
----
 
 ## 一、为什么需要全局状态管理？
 
@@ -36,7 +35,7 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph "❌ Zustand 之前的 Props 地狱"
-        Root["RootLayout\n(持有一切状态！)"]
+        Root["RootLayout<br/>(持有一切状态！)"]
         
         Root -->|"给当前项目统计"| Header
         Root -->|"传一大堆 Props 和回调"| ProjectsLayout
@@ -57,9 +56,9 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    Step1["① createContext(默认值)\n创建 Context 对象"]
-    Step2["② <Context.Provider value={...}>\n在组件树上层提供数据"]
-    Step3["③ useContext(Context)\n在任意下层组件中消费数据"]
+    Step1["① createContext(默认值)<br/>创建 Context 对象"]
+    Step2["② <Context.Provider value=﹛...﹜><br/>在组件树上层提供数据"]
+    Step3["③ useContext(Context)<br/>在任意下层组件中消费数据"]
     
     Step1 --> Step2 --> Step3
 ```
@@ -114,19 +113,21 @@ function App() {
 > **React 19 新增：** 你可以用 `use(ThemeContext)` 替代 `useContext(ThemeContext)`。两者功能相同，但 `use()` 可以在条件语句和循环中使用（传统 Hook 不行）。
 
 > [!NOTE]
-> **React 19 语法简化：** 从 React 19 开始，你可以直接用 `<ThemeContext>` 替代 `<ThemeContext.Provider>`：
-> ```tsx
-> // React 18: 必须写 .Provider
-> <ThemeContext.Provider value={{ theme, toggleTheme }}>
->   {children}
-> </ThemeContext.Provider>
->
-> // React 19: 直接用 Context 组件名即可
-> <ThemeContext value={{ theme, toggleTheme }}>
->   {children}
-> </ThemeContext>
-> ```
+> **React 19 语法简化：** 从 React 19 开始，你可以直接用 `<ThemeContext>` 替代 `<ThemeContext.Provider>`。
 > 现阶段两种写法都可用，`.Provider` 仍然有效；新写法主要是为了减少样板代码。
+
+::: code-group
+```tsx [React 18]
+<ThemeContext.Provider value={{ theme, toggleTheme }}>
+  {children}
+</ThemeContext.Provider>
+```
+```tsx [React 19]
+<ThemeContext value={{ theme, toggleTheme }}>
+  {children}
+</ThemeContext>
+```
+:::
 
 ### 2.2 ⚠️ Context 的性能陷阱
 
@@ -134,11 +135,11 @@ Context 有一个致命的性能问题：**当 Provider 的 `value` 变化时，
 
 ```mermaid
 flowchart TB
-    Provider["ThemeProvider\nvalue={{ theme, toggleTheme, fontSize, color }}"]
+    Provider["ThemeProvider<br/>value=\﹛theme, toggleTheme, fontSize, color\﹜"]
     
-    Provider --> A["组件 A\n只用了 theme\n✅ theme 变了要更新"]
-    Provider --> B["组件 B\n只用了 fontSize\n❌ theme 变了也被迫更新！"]
-    Provider --> C["组件 C\n只用了 color\n❌ theme 变了也被迫更新！"]
+    Provider --> A["组件 A<br/>只用了 theme<br/>✅ theme 变了要更新"]
+    Provider --> B["组件 B<br/>只用了 fontSize<br/>❌ theme 变了也被迫更新！"]
+    Provider --> C["组件 C<br/>只用了 color<br/>❌ theme 变了也被迫更新！"]
     
     style B fill:#ef4444,color:#fff
     style C fill:#ef4444,color:#fff
@@ -251,7 +252,7 @@ export default useProjectStore
 ```mermaid
 flowchart LR
     Store["useProjectStore"]
-    Sidebar["ProjectsLayout\n(Sidebar)"]
+    Sidebar["ProjectsLayout<br/>(Sidebar)"]
     Store -->|"订阅 projects 列表"| Sidebar
     Sidebar -.->|"UI 渲染"| DOM
     
@@ -357,11 +358,11 @@ const { projects, addProject } = useProjectStore()
 
 ```mermaid
 flowchart TB
-    Store["Zustand State\n{ a, b, c, d }"]
+    Store["Zustand State<br/>﹛ a, b, c, d ﹜"]
     
-    C1["组件1\nuseStore(s => s.a)"]
-    C2["组件2\nuseStore(s => s.b)"]
-    C3["组件3\nuseStore()"]
+    C1["组件1<br/>useStore(s => s.a)"]
+    C2["组件2<br/>useStore(s => s.b)"]
+    C3["组件3<br/>useStore()"]
     
     Store -->|"a 变了"| C1
     Store -.->|"a 变了, b没变"| C2
@@ -421,9 +422,3 @@ const { deleteProject } = useProjectActions()
 | 用 Zustand 搭建了全局 Store | `create((set) => ...)` 核心 API |
 | 跨页面完成项目删除交互同步 | 不传任何 Props 保持组件间状态双向绑定 |
 | — | Zustand Selector 获取最小数据片并限制重渲染爆炸原理 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 10：持久化 + 主题 — Zustand 中间件**](./Lesson_10.md)

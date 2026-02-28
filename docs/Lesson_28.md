@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：一个公网可访问的、完整的全栈电商网站，带有监控和自动化部署。
 
----
 
 ## 一、部署架构全景
 
@@ -15,16 +14,16 @@ flowchart TB
     end
     
     subgraph "Vercel 平台"
-        Build["自动构建\nnpm run build"]
-        Edge["Edge Network\n(全球 CDN)"]
-        Serverless["Serverless Functions\n(Server Components\n& Server Actions)"]
+        Build["自动构建<br/>npm run build"]
+        Edge["Edge Network<br/>(全球 CDN)"]
+        Serverless["Serverless Functions<br/>(Server Components<br/>& Server Actions)"]
     end
     
     subgraph "外部服务"
-        DB["PostgreSQL\n(Neon)"]
-        Auth["NextAuth\n(OAuth)"]
+        DB["PostgreSQL<br/>(Neon)"]
+        Auth["NextAuth<br/>(OAuth)"]
         Pay["Stripe"]
-        Monitor["Sentry\n(错误监控)"]
+        Monitor["Sentry<br/>(错误监控)"]
     end
     
     GH -->|"git push"| Build
@@ -76,15 +75,15 @@ npx prisma db seed
 ```mermaid
 flowchart LR
     subgraph "Development (本地)"
-        D1[".env.local\nSQLite / 本地 Postgres\nStripe 测试密钥\nlocalhost"]
+        D1[".env.local<br/>SQLite / 本地 Postgres<br/>Stripe 测试密钥<br/>localhost"]
     end
     
     subgraph "Preview (PR 预览)"
-        P1["Vercel Preview 环境变量\n独立的测试数据库\nStripe 测试密钥\n随机域名"]
+        P1["Vercel Preview 环境变量<br/>独立的测试数据库<br/>Stripe 测试密钥<br/>随机域名"]
     end
     
     subgraph "Production (生产)"
-        PR1["Vercel Production 环境变量\n生产数据库\nStripe 正式密钥\n正式域名"]
+        PR1["Vercel Production 环境变量<br/>生产数据库<br/>Stripe 正式密钥<br/>正式域名"]
     end
 ```
 
@@ -220,9 +219,9 @@ Sentry.init({
 ```mermaid
 flowchart LR
     Error["线上发生 JS 错误"] --> Sentry["Sentry 捕获"]
-    Sentry --> Dashboard["Sentry Dashboard\n错误详情 + 堆栈"]
-    Sentry --> Alert["Slack / 邮件\n实时告警"]
-    Sentry --> Trace["性能追踪\n慢请求定位"]
+    Sentry --> Dashboard["Sentry Dashboard<br/>错误详情 + 堆栈"]
+    Sentry --> Alert["Slack / 邮件<br/>实时告警"]
+    Sentry --> Trace["性能追踪<br/>慢请求定位"]
 ```
 
 ---
@@ -258,11 +257,11 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    P1["Phase 1: Todo App\n🟢 React 基础\nJSX / Hooks / useState / useEffect\nuseReducer / Performance"]
+    P1["Phase 1: Todo App<br/>🟢 React 基础<br/>JSX / Hooks / useState / useEffect<br/>useReducer / Performance"]
     
-    P2["Phase 2: 任务管理系统\n🟡 现代 React 生态\nRouter / Zustand / TanStack Query\nshadcn/ui / RHF + Zod\nErrorBoundary / 并发渲染特性"]
+    P2["Phase 2: 任务管理系统<br/>🟡 现代 React 生态<br/>Router / Zustand / TanStack Query<br/>shadcn/ui / RHF + Zod<br/>ErrorBoundary / 并发渲染特性"]
     
-    P3["Phase 3: 全栈电商平台\n🔴 独立开发者全栈\nNext.js 15 / RSC / Prisma\nNextAuth / Stripe / Testing\n性能优化 / 部署上线"]
+    P3["Phase 3: 全栈电商平台<br/>🔴 独立开发者全栈<br/>Next.js 15 / RSC / Prisma<br/>NextAuth / Stripe / Testing<br/>性能优化 / 部署上线"]
     
     P1 --> P2 --> P3
     
@@ -310,9 +309,3 @@ flowchart TB
 | 配置了自定义域名和 HTTPS | DNS 配置与 SSL 自动签发 |
 | — | 完整的生产部署检查清单 |
 | — | Phase 1~3 共 28 节课的完整知识图谱回顾 ✅ |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 29：React 最佳实践与反模式 — 写出专业级代码**](./Lesson_29.md)

@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：用户可以按分类筛选、搜索关键词、翻页浏览的商品展示页面，并带有完善的动态 meta 标签和结构化数据。
 
----
 
 ## 一、URL Search Params：服务端筛选的灵魂
 
@@ -14,8 +13,8 @@
 ```mermaid
 flowchart LR
     URL["/products?category=book&page=2"]
-    URL -->|"Next.js 解析"| SC["Server Component\nsearchParams"]
-    SC -->|"构建查询"| DB["prisma.product.findMany(\n  where: { category: 'book' },\n  skip: 10, take: 10\n)"]
+    URL -->|"Next.js 解析"| SC["Server Component<br/>searchParams"]
+    SC -->|"构建查询"| DB["prisma.product.findMany(<br/>  where: ﹛ category: 'book' ﹜,<br/>  skip: 10, take: 10<br/>)"]
     DB -->|"返回数据"| SC
     SC -->|"渲染 HTML"| Browser["浏览器"]
 ```
@@ -401,9 +400,3 @@ flowchart TB
 | 配置了静态和动态 Metadata | Next.js Metadata API + Open Graph |
 | 添加了 JSON-LD 结构化数据 | Google Rich Snippets |
 | — | `next/link` prefetch 预取机制 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 23：购物车与订单 — 混合状态管理**](./Lesson_23.md)

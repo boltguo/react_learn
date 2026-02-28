@@ -4,17 +4,16 @@
 >
 > 📦 **本节产出**：一个可以增、删、改（完成状态）、筛选、清除的 Todo App。
 
----
 
 ## 一、当前进度
 
 ```mermaid
 flowchart LR
-    A["Lesson 01\n静态页面 ✅"] --> B["Lesson 02\n组件拆分 ✅"]
-    B --> C["Lesson 03\n添加任务 ✅"]
-    C --> D["Lesson 04\n完成/删除/筛选\n👈 你在这里"]
-    D --> E["Lesson 05\n持久化+编辑"]
-    E --> F["Lesson 06\n重构+优化"]
+    A["Lesson 01<br/>静态页面 ✅"] --> B["Lesson 02<br/>组件拆分 ✅"]
+    B --> C["Lesson 03<br/>添加任务 ✅"]
+    C --> D["Lesson 04<br/>完成/删除/筛选<br/>👈 你在这里"]
+    D --> E["Lesson 05<br/>持久化+编辑"]
+    E --> F["Lesson 06<br/>重构+优化"]
 
     style D fill:#818cf8,color:#fff
 ```
@@ -46,9 +45,9 @@ flowchart TB
     end
     
     subgraph "map 处理"
-        M1["todo1.id ≠ targetId\n→ 返回原 todo1"]
-        M2["todo2.id = targetId\n→ 返回 { ...todo2,\n  completed: true }"]
-        M3["todo3.id ≠ targetId\n→ 返回原 todo3"]
+        M1["todo1.id ≠ targetId<br/>→ 返回原 todo1"]
+        M2["todo2.id = targetId<br/>→ 返回 ﹛ ...todo2,<br/>  completed: true ﹜"]
+        M3["todo3.id ≠ targetId<br/>→ 返回原 todo3"]
     end
     
     subgraph "新数组"
@@ -103,9 +102,9 @@ flowchart TB
     S1["todos（state）"]
     S2["filter（state）"]
     
-    S1 --> D["filteredTodos\n= todos.filter(...)\n派生计算"]
+    S1 --> D["filteredTodos<br/>= todos.filter(...)<br/>派生计算"]
     S2 --> D
-    S1 --> C["completedCount\n= todos.filter(...).length\n派生计算"]
+    S1 --> C["completedCount<br/>= todos.filter(...).length<br/>派生计算"]
     
     D --> UI["传给 TodoList 渲染"]
     C --> UI2["传给 Header 显示"]
@@ -230,10 +229,10 @@ export default App
 ```mermaid
 flowchart TB
     A["条件渲染模式"]
-    A --> B["&& 短路\n条件 && &lt;组件/&gt;"]
-    A --> C["三元\ncond ? &lt;A/&gt; : &lt;B/&gt;"]
-    A --> D["提前 return\nif (...) return &lt;Empty/&gt;"]
-    A --> E["变量赋值\nlet content = ...\nreturn &lt;div&gt;{content}&lt;/div&gt;"]
+    A --> B["&& 短路<br/>条件 && &lt;组件/&gt;"]
+    A --> C["三元<br/>cond ? &lt;A/&gt; : &lt;B/&gt;"]
+    A --> D["提前 return<br/>if (...) return &lt;Empty/&gt;"]
+    A --> E["变量赋值<br/>let content = ...<br/>return &lt;div&gt;﹛content﹜&lt;/div&gt;"]
 ```
 
 ```tsx
@@ -271,7 +270,7 @@ flowchart TB
     end
     
     subgraph "React 18+ / 19（全自动批量）"
-        D1["任何地方\nonClick / setTimeout\nPromise / 原生事件"] -->|"✅ 全部批量"| D2["1 次渲染"]
+        D1["任何地方<br/>onClick / setTimeout<br/>Promise / 原生事件"] -->|"✅ 全部批量"| D2["1 次渲染"]
     end
     
     style D2 fill:#10b981,color:#fff
@@ -325,9 +324,3 @@ console.log(document.getElementById('count')!.textContent)
 | 完整 CRUD + 筛选 | 派生数据不需要额外 state |
 | — | 条件渲染 4 种模式 + `&&` 陷阱 |
 | — | React 18+ 全自动批量更新（Automatic Batching） |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 05：持久化 + 编辑 — useEffect 处理副作用**](./Lesson_05.md)

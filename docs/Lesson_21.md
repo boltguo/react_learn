@@ -4,16 +4,15 @@
 >
 > 📦 **本节产出**：带有注册/登录页面、Middleware 路由保护和角色权限检查的安全认证系统。
 
----
 
 ## 一、认证 (Authentication) vs 授权 (Authorization)
 
 ```mermaid
 flowchart LR
-    A["Authentication 认证\n你是谁？"] --> B["Authorization 授权\n你能做什么？"]
+    A["Authentication 认证<br/>你是谁？"] --> B["Authorization 授权<br/>你能做什么？"]
     
-    A1["登录验证\n检查用户名密码"] --> A
-    B1["权限检查\n管理员才能删除商品"] --> B
+    A1["登录验证<br/>检查用户名密码"] --> A
+    B1["权限检查<br/>管理员才能删除商品"] --> B
 ```
 
 ---
@@ -323,8 +322,8 @@ export const config = {
 
 ```mermaid
 flowchart TB
-    Req["用户请求\n/admin/products"]
-    Req --> MW["Middleware\n检查 auth()"]
+    Req["用户请求<br/>/admin/products"]
+    Req --> MW["Middleware<br/>检查 auth()"]
     MW -->|"已登录 + admin"| Allow["✅ 放行"]
     MW -->|"已登录 + not admin"| Redirect1["🔀 重定向到首页"]
     MW -->|"未登录"| Redirect2["🔀 重定向到登录页"]
@@ -341,15 +340,15 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph "JWT (JSON Web Token)"
-        J1["登录"] --> J2["服务器签发 Token\n(含用户信息 + 签名)"]
+        J1["登录"] --> J2["服务器签发 Token<br/>(含用户信息 + 签名)"]
         J2 --> J3["存在浏览器 Cookie"]
-        J3 --> J4["每次请求携带\n服务器验证签名即可\n无需查数据库"]
+        J3 --> J4["每次请求携带<br/>服务器验证签名即可<br/>无需查数据库"]
     end
     
     subgraph "Database Session"
-        S1["登录"] --> S2["服务器创建 Session\n(存在数据库)"]
+        S1["登录"] --> S2["服务器创建 Session<br/>(存在数据库)"]
         S2 --> S3["Session ID 存在 Cookie"]
-        S3 --> S4["每次请求携带 ID\n服务器需查数据库"]
+        S3 --> S4["每次请求携带 ID<br/>服务器需查数据库"]
     end
 ```
 
@@ -378,9 +377,3 @@ flowchart TB
 | 创建了登录页面和会话获取 | Server Component 中 `auth()` 获取会话 |
 | 编写了 Middleware 路由守卫 | 请求级认证检查与角色权限控制 |
 | — | JWT vs Database Session 的架构差异 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 22：商品展示 — 分类搜索与 SEO 优化**](./Lesson_22.md)

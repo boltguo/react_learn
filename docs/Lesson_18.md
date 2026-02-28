@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：实现商品详情页（服务端直读数据库），并在其中嵌入客户端交互组件。
 
----
 
 ## 一、React Server Components 是什么？
 
@@ -16,12 +15,12 @@
 ```mermaid
 flowchart TB
     subgraph "传统 React (CSR)"
-        ALL["所有组件\n全部运行在浏览器上\n全部计入 Bundle 大小"]
+        ALL["所有组件<br/>全部运行在浏览器上<br/>全部计入 Bundle 大小"]
     end
     
     subgraph "React Server Components (RSC)"
-        SC["Server Components ⚙️\n运行在服务器\n可直接读数据库\n零 Bundle 体积\n(默认!!)"]
-        CC["Client Components 📱\n运行在浏览器\n处理交互 (onClick, useState)\n需标记 'use client'"]
+        SC["Server Components ⚙️<br/>运行在服务器<br/>可直接读数据库<br/>零 Bundle 体积<br/>(默认!!)"]
+        CC["Client Components 📱<br/>运行在浏览器<br/>处理交互 (onClick, useState)<br/>需标记 'use client'"]
     end
     
     style SC fill:#10b981,color:#fff
@@ -184,13 +183,13 @@ export default function FavoriteButton({ productId }: { productId: string }) {
 flowchart TB
     subgraph "Server (不发送到浏览器)"
         Layout["RootLayout ⚙️"]
-        Page["ProductDetail ⚙️\n(async, 查 DB)"]
+        Page["ProductDetail ⚙️<br/>(async, 查 DB)"]
         Info["ProductInfo ⚙️"]
     end
     
     subgraph "Client (发送到浏览器)"
-        Cart["AddToCartButton 📱\n'use client'"]
-        Fav["FavoriteButton 📱\n'use client'"]
+        Cart["AddToCartButton 📱<br/>'use client'"]
+        Fav["FavoriteButton 📱<br/>'use client'"]
     end
     
     Layout --> Page
@@ -211,10 +210,10 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    A["ProductPage.tsx\n(Server Component ⚙️)"]
-    A --> B["AddToCartButton.tsx\n'use client' 📱"]
-    B --> C["useCartStore.ts\n(被拖成 Client ❗)"]
-    B --> D["formatPrice.ts\n(被拖成 Client ❗)"]
+    A["ProductPage.tsx<br/>(Server Component ⚙️)"]
+    A --> B["AddToCartButton.tsx<br/>'use client' 📱"]
+    B --> C["useCartStore.ts<br/>(被拖成 Client ❗)"]
+    B --> D["formatPrice.ts<br/>(被拖成 Client ❗)"]
     
     style A fill:#10b981,color:#fff
     style B fill:#ef4444,color:#fff
@@ -278,7 +277,7 @@ flowchart TB
     Q1 -->|"否"| Q2{"需要直接访问\n数据库 / 文件系统？"}
     Q2 -->|"是"| B["保持 Server Component ⚙️"]
     Q2 -->|"否"| Q3{"引入了很大的\n第三方渲染库？"}
-    Q3 -->|"是"| C["保持 Server ⚙️\n(避免膨胀客户端 Bundle)"]
+    Q3 -->|"是"| C["保持 Server ⚙️<br/>(避免膨胀客户端 Bundle)"]
     Q3 -->|"否"| D["默认保持 Server ⚙️"]
     
     style A fill:#818cf8,color:#fff
@@ -306,9 +305,3 @@ flowchart TB
 | 划出了 `"use client"` 的交互按钮 | Client Component 的标记规则 |
 | — | `"use client"` 的传染性：import 链条全部变 Client |
 | — | 数据从 Server → Client 必须可序列化（注意 Date!) |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 19：数据库设计 — Prisma ORM 建模与迁移**](./Lesson_19.md)

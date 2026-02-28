@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：通过编写自定义 Hook（`useTaskMutations`、`useDebounce`）让 UI 组件重新变得清爽；使用 `useOptimistic` 替代手动乐观更新；理解 Compound Components 组合模式。
 
----
 
 ## 一、组件正在变得臃肿
 
@@ -148,7 +147,7 @@ flowchart TB
     subgraph "React 19 useOptimistic"
         B1["useOptimistic(当前值, 更新函数)"]
         --> B2["显示乐观值"]
-        --> B3["Server Action 完成后\n自动恢复真实值"]
+        --> B3["Server Action 完成后<br/>自动恢复真实值"]
     end
     
     style A1 fill:#ef4444,color:#fff
@@ -439,16 +438,16 @@ export default function Board() {
 ```mermaid
 flowchart TB
     subgraph "表现层 (View)"
-        UI["React 组件\n(只管如何显示)\nTaskItem.tsx / Board.tsx"]
+        UI["React 组件<br/>(只管如何显示)<br/>TaskItem.tsx / Board.tsx"]
     end
     
     subgraph "逻辑接入层 (Controller)"
-        Hooks["自定义 Hooks\nuseTaskMutations\nuseProjectsQuery\nuseDebounce"]
+        Hooks["自定义 Hooks<br/>useTaskMutations<br/>useProjectsQuery<br/>useDebounce"]
     end
     
     subgraph "数据访问层 (Model)"
-        Query["Zustand / TanStack Query\n(接管状态同步)"]
-        Fetch["API 请求函数\nfetchProjects / updateTask"]
+        Query["Zustand / TanStack Query<br/>(接管状态同步)"]
+        Fetch["API 请求函数<br/>fetchProjects / updateTask"]
     end
     
     UI -->|"调用"| Hooks
@@ -508,9 +507,3 @@ src/
 | 使用了 React 19 的 `useOptimistic` | 比手动 `onMutate` 更简洁的乐观更新方案 |
 | 手写了一个 Compound Component | 组合模式：Context 驱动的父子组件隐式通信 |
 | 梳理了项目的分层目录结构 | 现代前端架构 (UI → Hooks → Store/API) |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 16：Phase 2 总结 — ErrorBoundary、Suspense 与并发渲染特性**](./Lesson_16.md)

@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：对 React 内部运行机制的深刻理解，能够解释 React "为什么这样设计"，而不仅仅是"怎么用"。
 
----
 
 ## 一、从源码仓库说起
 
@@ -72,12 +71,12 @@ flowchart TB
     end
     
     subgraph "Fiber 链表（React 16+）"
-        R2["Root\nchild→App"]
-        R2 -->|child| A2["App\nchild→Header\nreturn→Root"]
-        A2 -->|child| B2["Header\nsibling→Main\nreturn→App"]
-        B2 -->|sibling| C2["Main\nchild→Item1\nreturn→App"]
-        C2 -->|child| D2["Item 1\nsibling→Item2\nreturn→Main"]
-        D2 -->|sibling| E2["Item 2\nreturn→Main"]
+        R2["Root<br/>child→App"]
+        R2 -->|child| A2["App<br/>child→Header<br/>return→Root"]
+        A2 -->|child| B2["Header<br/>sibling→Main<br/>return→App"]
+        B2 -->|sibling| C2["Main<br/>child→Item1<br/>return→App"]
+        C2 -->|child| D2["Item 1<br/>sibling→Item2<br/>return→Main"]
+        D2 -->|sibling| E2["Item 2<br/>return→Main"]
     end
     
     style R2 fill:#818cf8,color:#fff
@@ -114,13 +113,13 @@ React 同时维护**两棵 Fiber 树**：
 ```mermaid
 flowchart LR
     subgraph "current 树\n（当前屏幕显示的）"
-        C1["App\nprops: {count: 1}"]
+        C1["App<br/>props: ﹛count: 1﹜"]
         C2["Button"]
         C3["Display: 1"]
     end
     
     subgraph "workInProgress 树\n（后台正在构建的）"
-        W1["App\nprops: {count: 2}"]
+        W1["App<br/>props: ﹛count: 2﹜"]
         W2["Button ← 相同，复用"]
         W3["Display: 2 ← 变了，标记更新"]
     end
@@ -149,14 +148,14 @@ React 的 Diff 算法能把 O(n³) 的树对比优化到 O(n)，靠的是**三�
 
 ```mermaid
 flowchart TB
-    A["全量 Diff: O(n³)\n1000 个节点 = 10 亿次对比 💀"]
-    B["React Diff: O(n)\n1000 个节点 = 1000 次对比 ⚡"]
+    A["全量 Diff: O(n³)<br/>1000 个节点 = 10 亿次对比 💀"]
+    B["React Diff: O(n)<br/>1000 个节点 = 1000 次对比 ⚡"]
     
     A -->|"三个假设"| B
     
-    H1["假设 1: 不同类型\n的元素产生不同的树"]
-    H2["假设 2: 同级元素\n通过 key 属性标识"]
-    H3["假设 3: 跨层级移动\n极其罕见，不予优化"]
+    H1["假设 1: 不同类型<br/>的元素产生不同的树"]
+    H2["假设 2: 同级元素<br/>通过 key 属性标识"]
+    H3["假设 3: 跨层级移动<br/>极其罕见，不予优化"]
     
     B --> H1
     B --> H2
@@ -226,10 +225,10 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    Fiber["FiberNode\nmemoizedState →"]
-    H1["Hook 1\nuseState(0)\nmemoizedState: 0\nnext →"]
-    H2["Hook 2\nuseEffect(...)\nmemoizedState: effect\nnext →"]
-    H3["Hook 3\nuseRef(null)\nmemoizedState: {current: null}\nnext: null"]
+    Fiber["FiberNode<br/>memoizedState →"]
+    H1["Hook 1<br/>useState(0)<br/>memoizedState: 0<br/>next →"]
+    H2["Hook 2<br/>useEffect(...)<br/>memoizedState: effect<br/>next →"]
+    H3["Hook 3<br/>useRef(null)<br/>memoizedState: ﹛current: null﹜<br/>next: null"]
     
     Fiber --> H1 --> H2 --> H3
     
@@ -302,12 +301,12 @@ React 18+ 的更新不再是"先来先服务"，而是有**优先级**的：
 ```mermaid
 flowchart LR
     subgraph "任务队列"
-        T1["🔴 UserBlocking\n用户点击了按钮"]
-        T2["🟡 Normal\n列表数据返回了"]
-        T3["🟢 Low\nuseTransition 搜索"]
+        T1["🔴 UserBlocking<br/>用户点击了按钮"]
+        T2["🟡 Normal<br/>列表数据返回了"]
+        T3["🟢 Low<br/>useTransition 搜索"]
     end
     
-    Scheduler["Scheduler\n调度器"]
+    Scheduler["Scheduler<br/>调度器"]
     
     T1 -->|"优先处理"| Scheduler
     T2 -->|"排队"| Scheduler
@@ -353,18 +352,18 @@ function shouldYield(): boolean {
 ```mermaid
 flowchart LR
     subgraph "Render 阶段\n（可中断 ⏸️）"
-        R1["① beginWork\n创建/复用子 Fiber\n执行组件函数\n计算 Hook"]
-        R2["② completeWork\n收集副作用标记\n构建 DOM 节点（还没挂载！）"]
+        R1["① beginWork<br/>创建/复用子 Fiber<br/>执行组件函数<br/>计算 Hook"]
+        R2["② completeWork<br/>收集副作用标记<br/>构建 DOM 节点（还没挂载！）"]
     end
     
     subgraph "Commit 阶段\n（不可中断 🔒）"
-        C1["③ beforeMutation\n读取 DOM 快照\n(getSnapshotBeforeUpdate)"]
-        C2["④ mutation\n真正操作 DOM\n(appendChild/removeChild)"]
-        C3["⑤ layout\nuseLayoutEffect 执行\nref 赋值"]
+        C1["③ beforeMutation<br/>读取 DOM 快照<br/>(getSnapshotBeforeUpdate)"]
+        C2["④ mutation<br/>真正操作 DOM<br/>(appendChild/removeChild)"]
+        C3["⑤ layout<br/>useLayoutEffect 执行<br/>ref 赋值"]
     end
     
     R1 --> R2 --> C1 --> C2 --> C3
-    C3 -->|"异步"| Effect["⑥ passive effects\nuseEffect 执行"]
+    C3 -->|"异步"| Effect["⑥ passive effects<br/>useEffect 执行"]
     
     style R1 fill:#818cf8,color:#fff
     style C2 fill:#ef4444,color:#fff
@@ -489,26 +488,3 @@ module.exports = {
 | Scheduler 调度器 | 5 级优先级 + 5ms 时间分片 |
 | 渲染两阶段 | Render（可中断）→ Commit（不可中断）→ Effects |
 | React Compiler | 编译时自动追踪依赖、插入缓存 |
-
----
-
-## ➡️ 课程到这里就结束了 🎉
-
-恭喜你！完成了从入门到源码级理解的 React 学习之旅。
-
-```mermaid
-flowchart TB
-    P1["Phase 1: Todo App\n🟢 React 核心 API"]
-    P2["Phase 2: 任务管理系统\n🟡 现代生态"]
-    P3["Phase 3: 全栈电商\n🔴 Next.js 全栈"]
-    P4["Phase 4: 专精进阶\n⚫ 最佳实践 + 源码原理"]
-    
-    P1 --> P2 --> P3 --> P4
-    
-    P4 --> Next["🚀 开始你的独立项目！"]
-    
-    style P4 fill:#818cf8,color:#fff
-    style Next fill:#10b981,color:#fff
-```
-
-**去做一个你自己想做的项目吧。那才是真正掌握 React 的起点。**

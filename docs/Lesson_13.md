@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：将项目中的原生 HTML 元素替换为专业的 Button、Dialog、Select、Toast 等多态组件。
 
----
 
 ## 一、为什么是 shadcn/ui？
 
@@ -27,9 +26,9 @@
 
 ```mermaid
 flowchart LR
-    A["传统组件库\n(AntD / MUI)"] -->|npm install antd| B["黑盒组件\n修改样式必须覆盖 .ant-btn\n升级可能破坏你的自定义"]
+    A["传统组件库<br/>(AntD / MUI)"] -->|npm install antd| B["黑盒组件<br/>修改样式必须覆盖 .ant-btn<br/>升级可能破坏你的自定义"]
     
-    C["shadcn/ui\n(复制粘贴理念)"] -->|npx shadcn@latest add button| D["源码直接进入你的项目\nsrc/components/ui/button.tsx\n随时修改, 永远不会因为升级而坏掉"]
+    C["shadcn/ui<br/>(复制粘贴理念)"] -->|npx shadcn@latest add button| D["源码直接进入你的项目<br/>src/components/ui/button.tsx<br/>随时修改, 永远不会因为升级而坏掉"]
     
     style B fill:#ef4444,color:#fff
     style D fill:#10b981,color:#fff
@@ -49,14 +48,14 @@ Headless UI = **只提供行为逻辑**，完全不管长什么样。
 ```mermaid
 flowchart TB
     subgraph "传统 UI 库 (Ant Design)"
-        Logic1["行为逻辑\n(下拉展开/收起\n键盘导航\n焦点管理)"]
-        Style1["外观样式\n(.ant-select-dropdown\n内置 CSS)"]
+        Logic1["行为逻辑<br/>(下拉展开/收起<br/>键盘导航<br/>焦点管理)"]
+        Style1["外观样式<br/>(.ant-select-dropdown<br/>内置 CSS)"]
         Logic1 --- Style1
     end
     
     subgraph "Headless UI (@radix-ui)"
-        Logic2["行为逻辑\n(下拉展开/收起\n键盘导航\n焦点管理\nARIA 无障碍)"]
-        Style2["外观样式\n🚫 没有！\n你自己用 Tailwind 画"]
+        Logic2["行为逻辑<br/>(下拉展开/收起<br/>键盘导航<br/>焦点管理<br/>ARIA 无障碍)"]
+        Style2["外观样式<br/>🚫 没有！<br/>你自己用 Tailwind 画"]
         Logic2 -.-|"完全解耦"| Style2
     end
     
@@ -351,9 +350,3 @@ function SaveButton() {
 | 搞清了 `cn()` 的工作原理 | `clsx` 条件拼接 + `twMerge` 冲突解决 |
 | 学会了 `cva` 变体系统 | 一个组件多种外观的 Props API |
 | 安装使用了 Button、Dialog、Select、Toast | 组合式组件的使用姿势 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 14：复杂表单构建 — React Hook Form 与 Zod 校验**](./Lesson_14.md)

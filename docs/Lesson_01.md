@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：一个可运行的静态 Todo 页面（数据硬编码，还不能交互）。
 
----
 
 ## 一、创建项目
 
@@ -21,7 +20,7 @@ flowchart LR
     A["npm create vite"] --> B["生成项目骨架"]
     B --> C["npm install"]
     C --> D["npm run dev"]
-    D --> E["浏览器打开\nlocalhost:5173 🎉"]
+    D --> E["浏览器打开<br/>localhost:5173 🎉"]
 ```
 
 > [!NOTE]
@@ -137,13 +136,9 @@ createRoot(document.getElementById('root')!).render(
 
 ```mermaid
 flowchart LR
-    A["你写的 JSX\n&lt;h1 className='title'&gt;Hello&lt;/h1&gt;"] 
-    -->|"编译（Babel/SWC）"| 
-    B["jsx('h1', {\n  className: 'title',\n  children: 'Hello'\n})"]
-    -->|"执行"| 
-    C["React Element\n（普通 JS 对象）\n{ type: 'h1', props: {...} }"]
-    -->|"Reconciliation"| 
-    D["真实 DOM\n&lt;h1&gt;Hello&lt;/h1&gt;"]
+    A["你写的 JSX"] -->|"Babel / SWC 编译"| B["jsx 函数调用"]
+    B -->|"执行"| C["React Element 对象"]
+    C -->|"Reconciliation"| D["真实 DOM"]
 ```
 
 **核心认知：JSX 是 `createElement()` 的语法糖，返回一个描述 UI 的普通 JS 对象，不是真实 DOM。**
@@ -183,7 +178,7 @@ JSX 与 HTML 的差异速查：
 |------|-----|------|
 | `class` | `className` | `class` 是 JS 保留字 |
 | `for` | `htmlFor` | `for` 是 JS 保留字 |
-| `style="color: red"` | `style={{ color: 'red' }}` | JSX 中 style 是对象 |
+| `style="color: red"` | <code v-pre>style=&#123;&#123; color: 'red' &#125;&#125;</code> | JSX 中 style 是对象 |
 | `<br>` | `<br />` | JSX 要求所有标签闭合 |
 | `onclick` | `onClick` | JSX 事件用 camelCase |
 
@@ -384,11 +379,11 @@ flowchart TB
 
 ```mermaid
 flowchart TD
-    A["① 状态变化\nsetTodos([...todos, newTodo])"] 
-    --> B["② 重新调用组件函数\n生成新的 Virtual DOM 树"]
-    --> C["③ Diff 对比\n逐节点比较新旧两棵树"]
-    --> D["④ 计算最小变更集\n只记录有差异的部分"]
-    --> E["⑤ 批量更新真实 DOM\n一次性应用所有修改"]
+    A["① 状态变化<br/>setTodos([...todos, newTodo])"] 
+    --> B["② 重新调用组件函数<br/>生成新的 Virtual DOM 树"]
+    --> C["③ Diff 对比<br/>逐节点比较新旧两棵树"]
+    --> D["④ 计算最小变更集<br/>只记录有差异的部分"]
+    --> E["⑤ 批量更新真实 DOM<br/>一次性应用所有修改"]
 
     style A fill:#818cf8,color:#fff
     style C fill:#f59e0b,color:#fff
@@ -404,12 +399,12 @@ React 把树对比从 O(n³) 优化到 **O(n)**，靠两个大胆假设：
 ```mermaid
 flowchart LR
     subgraph "旧树"
-        OD["div"] --> OC["Counter\n(state=5)"]
+        OD["div"] --> OC["Counter<br/>(state=5)"]
     end
     subgraph "新树"
-        NS["span"] --> NC["Counter\n(state=0)"]
+        NS["span"] --> NC["Counter<br/>(state=0)"]
     end
-    OD -->|"div≠span\n类型不同"| X["💥 销毁旧子树\n🔨 重建新子树\nCounter 状态丢失！"]
+    OD -->|"div≠span\n类型不同"| X["💥 销毁旧子树<br/>🔨 重建新子树<br/>Counter 状态丢失！"]
 
     style X fill:#ef4444,color:#fff
 ```
@@ -453,7 +448,7 @@ React 16+ 将 Reconciliation 重写为 **Fiber 架构**：
 ```mermaid
 flowchart LR
     subgraph "旧：Stack Reconciler"
-        S["同步递归\n长时间占用主线程\n用户操作被阻塞 😫"]
+        S["同步递归<br/>长时间占用主线程<br/>用户操作被阻塞 😫"]
     end
     subgraph "新：Fiber Reconciler"
         F1["工作单元 1"] --> P1["⏸️ 可暂停"]
@@ -496,9 +491,3 @@ flowchart LR
 | 渲染了静态 Todo 页面 | JSX = `createElement()` 的语法糖，返回 JS 对象 |
 | 用 `.map()` + `key` 渲染列表 | key 如何帮助 Diff 算法高效运作 |
 | — | Virtual DOM → Reconciliation → Fiber 架构全景 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 02：拆分组件 — 把大组件拆成可复用的小组件**](./Lesson_02.md)

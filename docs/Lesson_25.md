@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：覆盖关键业务逻辑的测试套件，确保后续重构不破坏既有功能。
 
----
 
 ## 一、为什么要写测试？
 
@@ -14,9 +13,9 @@
 ```mermaid
 flowchart TB
     subgraph "测试金字塔"
-        E2E["🔺 E2E 测试 (端到端)\n模拟完整用户流程\n数量少，运行慢，覆盖广"]
-        Integration["🔶 集成测试\n多个模块协作\n数量中等"]
-        Unit["🟢 单元测试\n单个函数/组件\n数量多，运行快"]
+        E2E["🔺 E2E 测试 (端到端)<br/>模拟完整用户流程<br/>数量少，运行慢，覆盖广"]
+        Integration["🔶 集成测试<br/>多个模块协作<br/>数量中等"]
+        Unit["🟢 单元测试<br/>单个函数/组件<br/>数量多，运行快"]
     end
     
     style Unit fill:#10b981,color:#fff
@@ -244,9 +243,3 @@ describe('canTransition', () => {
 | 编写了组件渲染和交互测试 | `render` / `screen` / `fireEvent` API |
 | 测试了 Zustand Store 的行为 | `renderHook` + `act` 测试自定义 Hook |
 | 测试了纯函数和工具逻辑 | 间谍函数 `vi.fn()` 和模拟 `vi.mock()` |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 26：E2E 测试 — Playwright 全流程自动化**](./Lesson_26.md)

@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：一个看起来很像真实应用的后台布局环境，并且能通过 `/projects/:id` 读取不同看板。
 
----
 
 ## 一、真实世界的嵌套布局设计
 
@@ -12,10 +11,10 @@
 
 ```mermaid
 flowchart TB
-    A["&lt;RootLayout /&gt;\n(Header + 整体框架)"]
+    A["&lt;RootLayout /&gt;<br/>(Header + 整体框架)"]
     A --> B["&lt;Home /&gt;"]
     
-    A --> C["&lt;ProjectsLayout /&gt;\n(Projects Sidebar + 右侧 Outlet)"]
+    A --> C["&lt;ProjectsLayout /&gt;<br/>(Projects Sidebar + 右侧 Outlet)"]
     C --> D["&lt;ProjectsList /&gt;"]
     C --> E["&lt;ProjectBoard id=':id' /&gt;"]
 ```
@@ -211,7 +210,7 @@ flowchart LR
     B --> D["projects"]
     D --> E["&lt;ProjectsLayout /&gt;"]
     
-    E -->|index| F["&lt;ProjectList /&gt;\n(提示选择项)"]
+    E -->|index| F["&lt;ProjectList /&gt;<br/>(提示选择项)"]
     E -->|:id| G["&lt;Board /&gt;"]
 ```
 
@@ -321,9 +320,3 @@ export default function Board() {
 | 取出了 URL 里的项目 ID 渲染内容 | `useParams()` 和 动态路由语法 `:id` |
 | 配置了无匹配时的编程式补救 | `<Navigate replace />` 或默认 `index: true` 路由 |
 | — | v7 中 Loader 的数据预加载架构理念 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 09：全局状态 — Zustand 管理项目数据**](./Lesson_09.md)

@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：带有实时数量调整的购物车页面、导航栏徽标、以及创建订单的完整结算流程。
 
----
 
 ## 一、购物车的状态归属
 
@@ -18,11 +17,11 @@
 ```mermaid
 flowchart TB
     subgraph "客户端状态 (Zustand + localStorage)"
-        Cart["购物车\n{ items: [{id, name, price, qty}...] }"]
+        Cart["购物车<br/>﹛ items: [﹛id, name, price, qty﹜...] ﹜"]
     end
     
     subgraph "服务端操作 (Server Action)"
-        CreateOrder["createOrder()\n写入 Order + OrderItem"]
+        CreateOrder["createOrder()<br/>写入 Order + OrderItem"]
         UpdateStock["扣减库存"]
     end
     
@@ -158,13 +157,13 @@ export default function CartBadge() {
 
 ```mermaid
 flowchart TB
-    SSR["服务端渲染\nlocalStorage 不存在\npersist 读到 items: []"]
-    SSR -->|"HTML 发给浏览器"| Hydrate["客户端 Hydration\nlocalStorage 存在\npersist 读到 items: [3个商品]"]
+    SSR["服务端渲染<br/>localStorage 不存在<br/>persist 读到 items: []"]
+    SSR -->|"HTML 发给浏览器"| Hydrate["客户端 Hydration<br/>localStorage 存在<br/>persist 读到 items: [3个商品]"]
     Hydrate -->|"不一致!"| Error["💥 Hydration Mismatch"]
     
-    SSR2["服务端渲染\npersist 读到 items: []\nhydrated=false → 不渲染徽标"]
-    SSR2 -->|"HTML 发给浏览器"| Hydrate2["客户端 Hydration\nhydrated=false → 不渲染徽标\n✅ 一致！"]
-    Hydrate2 --> Effect["useEffect 触发\nhydrated=true → 渲染徽标"]
+    SSR2["服务端渲染<br/>persist 读到 items: []<br/>hydrated=false → 不渲染徽标"]
+    SSR2 -->|"HTML 发给浏览器"| Hydrate2["客户端 Hydration<br/>hydrated=false → 不渲染徽标<br/>✅ 一致！"]
+    Hydrate2 --> Effect["useEffect 触发<br/>hydrated=true → 渲染徽标"]
     
     style Error fill:#ef4444,color:#fff
     style Effect fill:#10b981,color:#fff
@@ -398,9 +397,3 @@ export function canTransition(from: string, to: string): boolean {
 | 解决了 SSR Hydration Mismatch | `useHydration` 延迟挂载技巧 |
 | 实现了完整的结算 Server Action | `$transaction` 事务保证原子性 |
 | — | 状态机建模在订单管理中的应用 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 24：支付集成 — Stripe 在线支付**](./Lesson_24.md)

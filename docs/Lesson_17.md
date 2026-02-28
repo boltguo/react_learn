@@ -4,7 +4,6 @@
 >
 > 📦 **本节产出**：一个基于 Next.js 15 App Router 的全栈项目，含首页和商品列表页面。
 
----
 
 ## 一、为什么需要 Next.js？
 
@@ -47,15 +46,15 @@ Next.js 最强大之处：**同一个项目里，不同页面可以选择不同�
 flowchart TB
     A["渲染模式"]
     
-    A --> CSR["CSR\nClient-Side Rendering\n纯浏览器渲染"]
-    A --> SSR["SSR\nServer-Side Rendering\n每次请求都在服务端渲染"]
-    A --> SSG["SSG\nStatic Site Generation\n构建时一次性生成"]
-    A --> ISR["ISR\nIncremental Static Regeneration\n静态生成 + 定时刷新"]
+    A --> CSR["CSR<br/>Client-Side Rendering<br/>纯浏览器渲染"]
+    A --> SSR["SSR<br/>Server-Side Rendering<br/>每次请求都在服务端渲染"]
+    A --> SSG["SSG<br/>Static Site Generation<br/>构建时一次性生成"]
+    A --> ISR["ISR<br/>Incremental Static Regeneration<br/>静态生成 + 定时刷新"]
     
-    CSR --> C1["适用：后台管理面板\n不需要 SEO"]
-    SSR --> C2["适用：商品详情页\n数据实时变化、需要 SEO"]
-    SSG --> C3["适用：博客文章\n内容几乎不变"]
-    ISR --> C4["适用：商品列表\n偶尔更新、需要 SEO"]
+    CSR --> C1["适用：后台管理面板<br/>不需要 SEO"]
+    SSR --> C2["适用：商品详情页<br/>数据实时变化、需要 SEO"]
+    SSG --> C3["适用：博客文章<br/>内容几乎不变"]
+    ISR --> C4["适用：商品列表<br/>偶尔更新、需要 SEO"]
     
     style SSR fill:#818cf8,color:#fff
     style ISR fill:#10b981,color:#fff
@@ -361,9 +360,3 @@ export default function GlobalError({
 | 创建了首页和商品列表页 | App Router 文件系统路由 |
 | 查看了 SSR 返回的完整 HTML | CSR / SSR / SSG / ISR 四种渲染模式 |
 | — | Hydration 水合的概念 |
-
----
-
-## ➡️ 下一课
-
-[**Lesson 18：Server Components — 颠覆认知的组件模型**](./Lesson_18.md)
