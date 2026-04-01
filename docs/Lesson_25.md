@@ -1,5 +1,16 @@
 # Lesson 25：单元测试 — Vitest + Testing Library
 
+
+## 🧭 本节统一学习流程
+
+1. **学习目标**：先明确本节要解决的业务问题与核心 API。
+2. **主线实战**：跟随课程实现可运行功能（先跑通，再优化）。
+3. **原理深挖**：理解为什么这样设计，以及常见误区。
+4. **练习挑战**：完成 L1/L2（阶段收官课建议加 L3）巩固迁移能力。
+5. **本节小结**：回顾“做了什么 / 学到了什么 / 下节前检查项”。
+
+> 建议节奏：阅读 20% + 编码 60% + 复盘 20%。
+
 > 🎯 **本节目标**：为组件、自定义 Hook 和 Server Action 编写单元测试，建立代码质量保障体系。
 >
 > 📦 **本节产出**：覆盖关键业务逻辑的测试套件，确保后续重构不破坏既有功能。
@@ -243,3 +254,66 @@ describe('canTransition', () => {
 | 编写了组件渲染和交互测试 | `render` / `screen` / `fireEvent` API |
 | 测试了 Zustand Store 的行为 | `renderHook` + `act` 测试自定义 Hook |
 | 测试了纯函数和工具逻辑 | 间谍函数 `vi.fn()` 和模拟 `vi.mock()` |
+
+---
+
+## 七、覆盖率与测试分层策略
+
+仅“写了测试”还不够，建议给关键模块设置覆盖率底线：
+
+```ts
+// vitest.config.ts
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    coverage: {
+      reporter: ['text', 'html'],
+      lines: 80,
+      functions: 80,
+      branches: 70,
+      statements: 80,
+    },
+  },
+})
+```
+
+建议分层目标：
+- 工具函数 / 状态机：高覆盖（85%+）
+- 业务组件：关注关键交互与回归路径
+- E2E：只覆盖关键主流程（登录、下单、支付回调）
+
+## 八、测试夹具（Fixtures）与可维护性
+
+把重复测试数据抽到 fixtures，降低重复代码与维护成本：
+
+```ts
+// src/test/fixtures/products.ts
+export const productA = { id: 'p1', name: 'React 进阶', price: 199 }
+export const productB = { id: 'p2', name: 'Next.js 实战', price: 299 }
+```
+
+```ts
+// src/lib/__tests__/cart.test.ts
+import { productA, productB } from '@/test/fixtures/products'
+```
+
+实践建议：
+1. `fixtures/` 放稳定样本数据
+2. `factories/` 放可定制数据生成器
+3. 每个测试只关注一个行为断言，避免“巨型测试”
+
+## 九、常见测试反模式
+
+| 反模式 | 风险 | 改进方式 |
+|---|---|---|
+| 过度依赖快照（snapshot） | UI 微调导致大量无效变更 | 以行为断言为主（可见文本、按钮状态、回调触发） |
+| 测试实现细节（内部 state） | 重构即破坏测试 | 只验证用户可观察行为 |
+| Mock 一切外部依赖 | 与真实环境偏差大 | 保留关键集成点，按边界选择性 Mock |
+| 单测替代 E2E | 关键流程未被端到端验证 | 对登录/下单/支付等主链路补 E2E |
+
+## 十、进阶练习（补充）
+
+1. 为 `createOrder` 增加失败分支测试：模拟 Prisma 抛错并断言返回可读错误。
+2. 为商品卡片组件添加可访问性断言：按钮是否具备可读名称（`aria-label` / 文本）。
+3. 输出覆盖率报告（HTML），识别最低覆盖模块并提出改进清单。

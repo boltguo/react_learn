@@ -1,5 +1,16 @@
 # Lesson 11：对接服务端 API — TanStack Query 与状态分类
 
+
+## 🧭 本节统一学习流程
+
+1. **学习目标**：先明确本节要解决的业务问题与核心 API。
+2. **主线实战**：跟随课程实现可运行功能（先跑通，再优化）。
+3. **原理深挖**：理解为什么这样设计，以及常见误区。
+4. **练习挑战**：完成 L1/L2（阶段收官课建议加 L3）巩固迁移能力。
+5. **本节小结**：回顾“做了什么 / 学到了什么 / 下节前检查项”。
+
+> 建议节奏：阅读 20% + 编码 60% + 复盘 20%。
+
 > 🎯 **本节目标**：理解客户端状态与服务端状态的本质区别，引入 TanStack Query (原 React Query) 管理异步数据。
 >
 > 📦 **本节产出**：将项目列表数据从本地 Zustand 迁移到远端 Mock API，并实现带 loading 的优雅请求。
@@ -275,3 +286,41 @@ function AddProjectButton() {
 | 用 `useQuery` 抓取数据并展示加载条 | 缓存隔离 (`queryKey`) 与重试机制 |
 | 用 `useMutation` 写入数据 | 控制状态过期 (`invalidateQueries`) 倒逼前端同步 |
 | — | 理解由于组件挂载时机引起的嵌套瀑布流请求 |
+
+
+---
+
+## 八、进阶补强：错误重试、Query Key 与失效策略
+
+### 8.1 不要把所有请求都“无脑重试”
+
+- `5xx` / 网络抖动：可重试
+- `4xx`（如 401/403/404）：通常不应重试
+
+```tsx
+useQuery({
+  queryKey: ['projects'],
+  queryFn: fetchProjects,
+  retry: (failureCount, error: any) => {
+    if (error?.status && error.status < 500) return false
+    return failureCount < 2
+  },
+})
+```
+
+### 8.2 Query Key 设计建议
+
+- 列表：`['projects', filters]`
+- 详情：`['project', projectId]`
+- 任务列表：`['tasks', projectId, status]`
+
+原则：**同一资源同一 key；不同筛选条件必须进入 key**。
+
+### 8.3 精准失效，避免全量抖动
+
+新增任务后优先失效 `['tasks', projectId]`，而不是 `invalidateQueries()` 全部清空。
+
+### 8.4 验收标准（L1/L2）
+
+1. **L1**：能区分列表 key 与详情 key，并在代码中正确使用。
+2. **L2**：实现“只失效当前项目任务列表”的 mutation 成功回调。

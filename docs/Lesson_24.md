@@ -1,5 +1,16 @@
 # Lesson 24：支付集成 — Stripe 在线支付
 
+
+## 🧭 本节统一学习流程
+
+1. **学习目标**：先明确本节要解决的业务问题与核心 API。
+2. **主线实战**：跟随课程实现可运行功能（先跑通，再优化）。
+3. **原理深挖**：理解为什么这样设计，以及常见误区。
+4. **练习挑战**：完成 L1/L2（阶段收官课建议加 L3）巩固迁移能力。
+5. **本节小结**：回顾“做了什么 / 学到了什么 / 下节前检查项”。
+
+> 建议节奏：阅读 20% + 编码 60% + 复盘 20%。
+
 > 🎯 **本节目标**：对接 Stripe 支付网关，实现从下单到付款的完整闭环。
 >
 > 📦 **本节产出**：用户可以通过 Stripe Checkout 完成真实的支付流程（测试模式），并通过 Webhook 自动更新订单状态。
@@ -215,3 +226,64 @@ await prisma.order.update({ where: { id: orderId }, data: { status: 'paid' } })
 | 编写了 Webhook 接收支付回调 | API Route vs Server Actions 的使用场景区分 |
 | — | 支付安全：签名验证与幂等性 |
 | — | Webhook 解决网络不可靠导致的状态丢失 |
+
+---
+
+## 七、进阶实战：支付失败与订单恢复策略
+
+仅有「支付成功」路径不够，生产环境必须覆盖失败与中断场景。
+
+### 7.1 失败页与取消页
+
+- `success_url`：展示订单摘要 +「继续购物」入口
+- `cancel_url`：提示支付未完成，并允许用户重新发起支付
+
+```tsx
+// src/app/checkout/cancel/page.tsx
+import Link from 'next/link'
+
+export default function CheckoutCancelPage() {
+  return (
+    <main className="mx-auto max-w-lg space-y-4 py-10">
+      <h1 className="text-2xl font-semibold">支付未完成</h1>
+      <p className="text-muted-foreground">你可以返回订单页重新支付，不会重复创建订单。</p>
+      <Link href="/orders" className="underline">返回订单中心</Link>
+    </main>
+  )
+}
+```
+
+### 7.2 订单恢复任务（补偿机制）
+
+当用户支付后页面关闭，Webhook 延迟或短时失败时，可通过定时任务做状态对账：
+
+```ts
+// 伪代码：每 10 分钟扫描 pending 且创建超过 30 分钟的订单
+const staleOrders = await prisma.order.findMany({
+  where: {
+    status: 'pending',
+    createdAt: { lt: new Date(Date.now() - 30 * 60 * 1000) }
+  }
+})
+
+for (const order of staleOrders) {
+  // 向 Stripe 查询 checkout session 最终状态
+  // 如已支付则补写 paid，否则标记 expired
+}
+```
+
+### 7.3 幂等键与重复点击防护
+
+- 服务端创建 Checkout Session 时，建议携带业务主键（如 `orderId`）作为幂等标识
+- 前端在提交后立即禁用按钮，防止双击
+- Webhook 处理前先判断事件是否已消费（可建 `webhook_events` 表）
+
+---
+
+## 八、联调与排障清单（推荐保存）
+
+1. `STRIPE_SECRET_KEY`、`STRIPE_WEBHOOK_SECRET` 是否来自同一 Stripe 环境（测试/生产不要混用）
+2. 本地 `stripe listen` 转发地址是否与当前端口一致
+3. `metadata.orderId` 是否成功写入并在 Webhook 中可读
+4. Webhook 接口是否返回 2xx（否则 Stripe 会持续重试）
+5. 是否记录了事件 `id`，用于排查重复投递与幂等处理
