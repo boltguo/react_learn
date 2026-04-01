@@ -1,5 +1,17 @@
 # Lesson 02：拆分组件 — Props 与组件组合
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 1（基础篇）
+- **推荐时长**：45~75 分钟（首次学习）
+- **先修要求**：HTML / CSS / JavaScript 基础，Node.js 基本命令
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -452,7 +464,7 @@ flowchart TB
     TodoItem2 -.->|"onDelete(id) ↑"| App
     TodoInput -.->|"onAdd(text) ↑"| App
 
-    style App fill:#818cf8,color:#fff
+    style App fill:#3b82f6,color:#fff
 ```
 
 - **实线 ↓**：Props 向下流（数据）

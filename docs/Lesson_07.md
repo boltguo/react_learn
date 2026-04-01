@@ -1,5 +1,17 @@
 # Lesson 07：多页面架构 — React Router v7 基础
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 2（进阶篇）
+- **推荐时长**：75~120 分钟（首次学习）
+- **先修要求**：完成 Phase 1，理解组件拆分与基础状态管理
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -40,7 +52,7 @@ flowchart TB
     Layout --> Board["/projects/:id (项目任务看板)"]
     Layout --> Settings["/settings (设置面板)"]
     
-    style Root fill:#818cf8,color:#fff
+    style Root fill:#3b82f6,color:#fff
     style Layout fill:#f59e0b,color:#fff
 ```
 

@@ -1,5 +1,17 @@
 # Lesson 29：React 最佳实践与反模式 — 写出专业级代码
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 4（精通篇）
+- **推荐时长**：120~180 分钟（首次学习）
+- **先修要求**：至少完成一个 React 中型项目，具备 TS 与性能调优基础
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -119,7 +131,7 @@ flowchart TD
     E -->|"频繁变（表单/列表）"| G["Zustand / TanStack Query"]
     
     style B fill:#10b981,color:#fff
-    style D fill:#818cf8,color:#fff
+    style D fill:#3b82f6,color:#fff
     style F fill:#f59e0b,color:#fff
     style G fill:#ef4444,color:#fff
 ```
@@ -147,7 +159,7 @@ const activeCount = todos.length - completedCount
 const handleToggle = (id: number) => {
   const todo = todos.find(t => t.id === id)
   todo!.completed = !todo!.completed  // 直接修改了对象
-  setTodos(todos)                      // React 认为引用没变，不重渲染！
+  setTodos(todos)                      // React 认为引用没变，不重新渲染！
 }
 
 // ✅ 不可变更新（Immutable Update）
@@ -479,7 +491,7 @@ NEXT_PUBLIC_STRIPE_SECRET_KEY=...  # 支付密钥暴露给浏览器！
 |------|------|
 | **Components 面板** | 查看组件树、Props、State、Hooks 的实时值 |
 | **Profiler 面板** | 录制渲染过程，找出渲染耗时最长的组件 |
-| **"Highlight updates"** | 开启后，每次重渲染的组件会闪烁高亮 |
+| **"Highlight updates"** | 开启后，每次重新渲染的组件会闪烁高亮 |
 
 ### 8.2 常用调试手段
 
@@ -514,7 +526,7 @@ useEffect(() => {
 | 在循环/条件中调用 Hook | 破坏 Hook 调用顺序，React 崩溃 | 始终在组件顶层调用 |
 | 用 `index` 做 key | 列表增删时组件状态错乱 | 用唯一 ID |
 | `useState` + `useEffect` 管理服务端数据 | 缺少缓存、重试、乐观更新 | TanStack Query / SWR |
-| Context 中放频繁变化的数据 | 所有消费者不必要地重渲染 | Zustand selector |
+| Context 中放频繁变化的数据 | 所有消费者不必要地重新渲染 | Zustand selector |
 | 组件中直接 `fetch` 不缓存 | 路由切换回来后重复请求 | TanStack Query staletime |
 
 ---
@@ -525,7 +537,7 @@ useEffect(() => {
 
 | 专项 | 训练内容 | 达标标准 |
 |------|---------|---------|
-| 渲染模型 | 手写 2 个案例解释 render/commit、状态快照、批处理、Effect 时机 | 能准确解释"为什么会重渲染"和"为什么出现旧值闭包" |
+| 渲染模型 | 手写 2 个案例解释 render/commit、状态快照、批处理、Effect 时机 | 能准确解释"为什么会重新渲染"和"为什么出现旧值闭包" |
 | 状态架构 | 对同一需求分别用 local state / Context / Zustand / TanStack Query 建模 | 能说清每种方案的边界和迁移成本 |
 | 性能分析 | 用 React DevTools Profiler 分析 3 个真实性能问题并给出前后对比 | 优化结果有量化指标（渲染次数、耗时、包体积） |
 | TypeScript | 写 3 个泛型组件、2 个复杂 Hook 类型（含返回值推导） | 不使用 `any` 仍能保持良好可读性 |
@@ -566,7 +578,7 @@ flowchart TB
     Practice --> P3["Code Review<br/>在团队中审查他人代码"]
     
     style Course fill:#10b981,color:#fff
-    style Deep fill:#818cf8,color:#fff
+    style Deep fill:#3b82f6,color:#fff
     style Width fill:#f59e0b,color:#fff
     style Practice fill:#ef4444,color:#fff
 ```
