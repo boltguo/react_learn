@@ -33,7 +33,6 @@
 ```
 react_learn/
 ├── README.md              ← 项目介绍（本文件）
-├── .vitepress/            ← VitePress 配置
 └── docs/
     ├── Lesson_01.md       ← Phase 1：Todo App（6 课）
     ├── ...

@@ -1,5 +1,16 @@
 # Lesson 06：useReducer 重构 + 性能优化
 
+
+## 🧭 本节统一学习流程
+
+1. **学习目标**：先明确本节要解决的业务问题与核心 API。
+2. **主线实战**：跟随课程实现可运行功能（先跑通，再优化）。
+3. **原理深挖**：理解为什么这样设计，以及常见误区。
+4. **练习挑战**：完成 L1/L2（阶段收官课建议加 L3）巩固迁移能力。
+5. **本节小结**：回顾“做了什么 / 学到了什么 / 下节前检查项”。
+
+> 建议节奏：阅读 20% + 编码 60% + 复盘 20%。
+
 > 🎯 **本节目标**：用 `useReducer` 统一管理 Todo 状态逻辑，学习 `React.memo` / `useMemo` / `useCallback` 性能优化。
 >
 > 📦 **本节产出**：Phase 1 Todo App 完成版——逻辑清晰、性能优化、代码规范。
@@ -486,3 +497,19 @@ flowchart TB
 1. **测试 reducer**：单独测试 `todoReducer`，验证每个 action 的行为
 2. **添加 undo**：保存操作历史，实现撤销功能（提示：用 state 记录之前的 todos 快照）
 3. **DevTools Profiler**：安装 React DevTools，用 Profiler 观察 memo 前后的渲染差异
+
+---
+
+## 十、📌 本节小结
+
+| 你做了什么 | 你学到了什么 |
+|-----------|------------|
+| 用 `useReducer` 重构 Todo 状态逻辑 | 把复杂状态更新集中到 reducer，降低维护成本 |
+| 为组件添加 `React.memo` / `useMemo` / `useCallback` | 先定位瓶颈，再做有证据的性能优化 |
+| 了解 React 19 的 `useActionState` | 表单场景下把提交状态和错误状态集中管理 |
+| 完成 Phase 1 收官 | 具备进入多页面工程（Phase 2）的能力 |
+
+**进入下一课前检查清单：**
+- [ ] 能解释 `useState` 与 `useReducer` 的取舍边界
+- [ ] 能写出纯函数 reducer 并为 action 做类型约束
+- [ ] 知道何时应该/不应该使用 `memo` 与 `useCallback`
