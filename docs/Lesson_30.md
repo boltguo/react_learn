@@ -1,5 +1,17 @@
 # Lesson 30：React 源码深度剖析 — Fiber、Reconciler 与调度器
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 4（精通篇）
+- **推荐时长**：120~180 分钟（首次学习）
+- **先修要求**：至少完成一个 React 中型项目，具备 TS 与性能调优基础
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -90,7 +102,7 @@ flowchart TB
         D2 -->|sibling| E2["Item 2<br/>return→Main"]
     end
     
-    style R2 fill:#818cf8,color:#fff
+    style R2 fill:#3b82f6,color:#fff
 ```
 
 **关键区别：链表可以中断和恢复！**
@@ -216,7 +228,7 @@ flowchart LR
     B -->|"key 消失"| X["销毁 ❌"]
     
     style A2 fill:#10b981,color:#fff
-    style C2 fill:#818cf8,color:#fff
+    style C2 fill:#3b82f6,color:#fff
     style D2 fill:#f59e0b,color:#fff
     style X fill:#ef4444,color:#fff
 ```
@@ -243,7 +255,7 @@ flowchart LR
     
     Fiber --> H1 --> H2 --> H3
     
-    style Fiber fill:#818cf8,color:#fff
+    style Fiber fill:#3b82f6,color:#fff
 ```
 
 **这就是为什么 Hook 不能在条件/循环中调用！**
@@ -326,7 +338,7 @@ flowchart LR
     Scheduler -->|"时间分片 5ms"| Main["主线程"]
     
     style T1 fill:#ef4444,color:#fff
-    style Scheduler fill:#818cf8,color:#fff
+    style Scheduler fill:#3b82f6,color:#fff
 ```
 
 ### 5.2 时间分片（Time Slicing）
@@ -376,7 +388,7 @@ flowchart LR
     R1 --> R2 --> C1 --> C2 --> C3
     C3 -->|"异步"| Effect["⑥ passive effects<br/>useEffect 执行"]
     
-    style R1 fill:#818cf8,color:#fff
+    style R1 fill:#3b82f6,color:#fff
     style C2 fill:#ef4444,color:#fff
     style Effect fill:#10b981,color:#fff
 ```
@@ -457,7 +469,7 @@ module.exports = {
 
 ### Q3: setState 是同步还是异步的？
 
-**答：** 在 React 18+ 中，所有 setState 都是"批量处理"的（Automatic Batching）。setState 本身是同步函数调用，但它只是将更新放入队列，真正的状态变化和重渲染发生在下一个微任务中。可以理解为"调度是同步的，生效是异步的"。
+**答：** 在 React 18+ 中，所有 setState 都是"批量处理"的（Automatic Batching）。setState 本身是同步函数调用，但它只是将更新放入队列，真正的状态变化和重新渲染发生在下一个微任务中。可以理解为"调度是同步的，生效是异步的"。
 
 ### Q4: useEffect 和 useLayoutEffect 的区别？
 

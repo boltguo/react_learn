@@ -1,5 +1,17 @@
 # Lesson 05：持久化 + 编辑 — useEffect 处理副作用
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 1（基础篇）
+- **推荐时长**：60~90 分钟（首次学习）
+- **先修要求**：HTML / CSS / JavaScript 基础，Node.js 基本命令
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -66,7 +78,7 @@ useEffect(() => {
 
 ```mermaid
 flowchart TB
-    A["useEffect(fn, ???)"]
+    A["useEffect(fn, deps?)"]
     
     A -->|"无依赖数组\nuseEffect(fn)"| B["每次渲染后都执行<br/>⚠️ 通常不是你想要的"]
     A -->|"空数组\nuseEffect(fn, [])"| C["只在挂载时执行 1 次<br/>类似 componentDidMount"]
@@ -74,7 +86,7 @@ flowchart TB
     
     style B fill:#ef4444,color:#fff
     style C fill:#10b981,color:#fff
-    style D fill:#818cf8,color:#fff
+    style D fill:#3b82f6,color:#fff
 ```
 
 ```tsx
@@ -373,14 +385,14 @@ inputRef.current?.focus()
 inputRef.current?.select()
 ```
 
-#### 用途 2：可变容器（存储跨渲染的值，但不触发重渲染！）
+#### 用途 2：可变容器（存储跨渲染的值，但不触发重新渲染！）
 
 这是被很多教程忽略的关键用法。`useRef` 本质是一个**在整个组件生命周期中持久存在的可变盒子**。
 
 ```mermaid
 flowchart LR
     subgraph "useState"
-        S["值变化 → 触发重渲染<br/>适合：UI 需要反映的数据"]
+        S["值变化 → 触发重新渲染<br/>适合：UI 需要反映的数据"]
     end
     
     subgraph "useRef"
@@ -413,7 +425,7 @@ function AutoSave({ content }: { content: string }) {
 }
 ```
 
-如果你用 `useState` 存 timer ID，每次 set 都会触发无意义的重渲染！
+如果你用 `useState` 存 timer ID，每次 set 都会触发无意义的重新渲染！
 
 **场景 B：记住"上一次渲染"的值**
 
@@ -575,7 +587,7 @@ flowchart TB
     G --> A
 
     style C fill:#10b981,color:#fff
-    style F fill:#818cf8,color:#fff
+    style F fill:#3b82f6,color:#fff
 ```
 
 > [!NOTE]

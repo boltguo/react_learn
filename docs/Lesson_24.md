@@ -1,5 +1,17 @@
 # Lesson 24：支付集成 — Stripe 在线支付
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 3（实战篇）
+- **推荐时长**：120~180 分钟（首次学习）
+- **先修要求**：完成 Phase 1~2，理解路由、状态管理与异步请求
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -46,7 +58,7 @@ npm install stripe
 
 在 `.env` 中添加（去 [Stripe Dashboard](https://dashboard.stripe.com/test/apikeys) 的测试模式获取密钥）：
 
-```env
+```bash
 STRIPE_SECRET_KEY=sk_test_xxxxxx
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxx
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxx

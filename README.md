@@ -1,6 +1,7 @@
 # 🚀 React 19 项目驱动学习体系
 
 > 以真实项目为主线，边写边学，深入掌握 React 19 及现代前端全栈生态。
+>
 
 ## 📖 这是什么？
 
@@ -21,6 +22,8 @@
 - 🆕 **React 19 新特性全覆盖**：use() / useOptimistic / useActionState / useFormStatus / Server Components / ref as prop
 - 🏗️ **高级设计模式**：Compound Components / Render Props / ErrorBoundary / React.lazy 代码分割
 - 🛡️ **生产级工程实践**：Vitest 单元测试 + Playwright E2E / Sentry 错误监控 / CI/CD + Vercel 部署
+- 📘 **文章即代码**：所有关键实现都直接写在课文 code snippet 中，开箱即学
+- 🧭 **统一学习闭环**：每节课默认包含目标、实战、原理、练习与小结
 
 ## 🎯 适合谁？
 
@@ -47,6 +50,12 @@ react_learn/
 ## 🏁 开始学习
 
 👉 查看 [**课程大纲**](./docs/CURRICULUM.md) 了解完整路线图，然后从 [Lesson 01](./docs/Lesson_01.md) 开始。
+
+### 建议学习方法
+
+1. 不跳步：严格按 Lesson 01 → 30 顺序推进（前后依赖很强）。
+2. 不只复制：每段代码至少手敲一遍并做一处小改动验证理解。
+3. 必做复盘：每节记录 1 个“我今天踩过的坑”和“如何避免复发”。
 
 ## ⚙️ 环境要求
 

@@ -1,5 +1,17 @@
 # Lesson 06：useReducer 重构 + 性能优化
 
+## 🧩 本节信息卡（学习前先看）
+
+- **阶段定位**：Phase 1（基础篇）
+- **推荐时长**：60~90 分钟（首次学习）
+- **先修要求**：HTML / CSS / JavaScript 基础，Node.js 基本命令
+- **学习产出**：完成本节功能，并能用自己的话解释关键设计取舍
+
+::: details ✅ 本节完成标准（自检清单）
+- [ ] 我可以独立复现文中的核心代码片段
+- [ ] 我能解释“为什么这样实现”，而不只是“照着写”
+- [ ] 我记录了至少 1 个踩坑点和修复方法
+::: 
 
 ## 🧭 本节统一学习流程
 
@@ -40,7 +52,7 @@ flowchart LR
         R --- H["dispatch(﹛ type: 'CLEAR' ﹜)"]
     end
     
-    style R fill:#818cf8,color:#fff
+    style R fill:#3b82f6,color:#fff
 ```
 
 **`useReducer` 把"做什么"和"怎么做"分离开：组件只负责 dispatch（做什么），reducer 负责具体逻辑（怎么做）。**
@@ -214,7 +226,7 @@ flowchart TB
     A["感觉到卡顿了吗？"]
     A -->|"没有"| B["不需要优化 ✅<br/>Premature optimization<br/>is the root of all evil"]
     A -->|"有"| C["用 React DevTools<br/>Profiler 定位瓶颈"]
-    C --> D["找到不必要的重渲染？"]
+    C --> D["找到不必要的重新渲染？"]
     D -->|"是"| E["使用 memo / useMemo / useCallback"]
     D -->|"不是"| F["可能是其他原因<br/>虚拟列表 / 防抖 / Web Worker"]
     
@@ -226,7 +238,7 @@ flowchart TB
 > 只在 **真正遇到性能问题** 时才使用优化手段。
 > 过早优化会增加代码复杂度，而且往往效果甚微。
 
-### 4.2 React.memo — 跳过不必要的重渲染
+### 4.2 React.memo — 跳过不必要的重新渲染
 
 ```tsx
 import { memo } from 'react'
@@ -309,7 +321,7 @@ flowchart TB
     
     B -.->|"需要配合"| C
     
-    style B fill:#818cf8,color:#fff
+    style B fill:#3b82f6,color:#fff
     style C fill:#f59e0b,color:#fff
     style D fill:#10b981,color:#fff
 ```
@@ -409,7 +421,7 @@ flowchart LR
     -->
     C["运行时<br/>性能最优 ✅"]
     
-    style B fill:#818cf8,color:#fff
+    style B fill:#3b82f6,color:#fff
 ```
 
 - 已在 Meta 内部生产环境使用
@@ -474,7 +486,7 @@ flowchart TB
     L6 -->|"Phase 2"| P2["📋 任务管理系统<br/>Router · Zustand<br/>TanStack Query · shadcn/ui"]
     
     style L6 fill:#10b981,color:#fff
-    style P2 fill:#818cf8,color:#fff
+    style P2 fill:#3b82f6,color:#fff
 ```
 
 ### Phase 1 全面回顾
